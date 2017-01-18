@@ -1,0 +1,2 @@
+# Battleships
+Classic Battleships game
