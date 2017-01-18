@@ -1,2 +1,2 @@
 # Battleships
-Classic Battleships game
+Classic Battleships game where you try to sink your opponent's ships.
