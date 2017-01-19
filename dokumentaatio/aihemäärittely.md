@@ -2,7 +2,7 @@
 
 **Käyttäjät:** Pelaaja
 
-**Pelaajan toiminnot:** '
+**Pelaajan toiminnot:**
 
   * laivan asetus
     * onnistuu jos ruudussa ei ole jo laivaa tai toinen laiva ei ole liian lähellä
