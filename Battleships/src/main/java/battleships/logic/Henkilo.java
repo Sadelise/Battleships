@@ -4,9 +4,9 @@ public class Henkilo extends Pelaaja {
 
     @Override
     public Laiva shoot(int x, int y) {
-        if (super.getSijainnit()[x][y] != null) {
-            super.getSijainnit()[x][y].shoot();
-            return super.getSijainnit()[x][y];
+        if (super.getLocations()[x][y] != null) {
+            super.getLocations()[x][y].shoot();
+            return super.getLocations()[x][y];
         }
         return null;
     }

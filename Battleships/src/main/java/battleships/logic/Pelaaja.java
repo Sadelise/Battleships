@@ -4,26 +4,26 @@ import java.util.*;
 
 public abstract class Pelaaja {
 
-    private ArrayList<Laiva> laivasto;
-    private Laiva[][] sijainnit;
+    private ArrayList<Laiva> ships;
+    private Laiva[][] locations;
 
     public Pelaaja() {
-        laivasto = new ArrayList<>();
-        sijainnit = new Laiva[10][10];
+        ships = new ArrayList<>();
+        locations = new Laiva[10][10];
     }
 
     abstract public Laiva shoot(int x, int y);
 
-    public ArrayList<Laiva> getLaivasto() {
-        return laivasto;
+    public ArrayList<Laiva> getShips() {
+        return ships;
     }
 
-    public Laiva[][] getSijainnit() {
-        return sijainnit;
+    public Laiva[][] getLocations() {
+        return locations;
     }
 
     public Boolean didPlayerLose() {
-        for (Laiva laiva : laivasto) {
+        for (Laiva laiva : ships) {
             if (!laiva.didItSink()) {
                 return false;
             }
@@ -37,9 +37,9 @@ public abstract class Pelaaja {
                 && x.length != 0
                 && shipPiecesAttached(x, y)) {
             for (int i = 0; i < x.length; i++) {
-                sijainnit[x[i]][y[i]] = laiva;
+                locations[x[i]][y[i]] = laiva;
             }
-            laivasto.add(laiva);
+            ships.add(laiva);
             return true;
         } else {
             return false;
@@ -58,8 +58,8 @@ public abstract class Pelaaja {
     private Boolean isSingleCoordinateAcceptable(Laiva laiva, int x, int y) {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
-                if (i >= 0 && i < sijainnit.length && j >= 0 && j < sijainnit.length) {
-                    if (sijainnit[j][i] != null) {
+                if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {
+                    if (locations[j][i] != null) {
                         return false;
                     }
                 }
