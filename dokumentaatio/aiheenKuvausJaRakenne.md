@@ -9,4 +9,4 @@
   * ampuminen
     * onnistuu jos samaa ruutua ei ole jo ammuttu
 
-![luokkakaavio](http://yuml.me/88af6037)
+![luokkakaavio](http://yuml.me/c9f59846)
