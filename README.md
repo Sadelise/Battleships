@@ -2,5 +2,5 @@
 Classic Battleships game where you try to sink your opponent's ships.
 
 ## Dokumentaatio 
-[aiheen kuvaus](dokumentaatio/aihemäärittely.md)  
+[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.m)  
 [tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
