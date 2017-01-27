@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Tekoaly.java">battleships/logic/Tekoaly.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.Person.java">battleships/logic/Person.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Henkilo.java">battleships/logic/Henkilo.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.Ai.java">battleships/logic/Ai.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.Player.java">battleships/logic/Player.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.Ship.java">battleships/logic/Ship.java</a>
                 </td>
                 <td>
                   0
@@ -103,34 +131,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#battleships.battleships.Main.java">battleships/battleships/Main.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Laiva.java">battleships/logic/Laiva.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Pelaaja.java">battleships/logic/Pelaaja.java</a>
                 </td>
                 <td>
                   0

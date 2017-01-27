@@ -1,4 +1,3 @@
-
 package battleships.logic;
 
 import org.junit.After;
@@ -8,23 +7,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TekoalyTest {
-    
-    public TekoalyTest() {
+public class AiTest {
+
+    public AiTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }

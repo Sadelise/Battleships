@@ -1,8 +1,5 @@
 package battleships.logic;
 
-import battleships.logic.Pelaaja;
-import battleships.logic.Laiva;
-import battleships.logic.Henkilo;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,21 +7,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class PelaajaTest {
+public class PlayerTest {
 
-    private Pelaaja pelaaja;
-    private Laiva laiva;
+    private Player player;
+    private Ship ship;
 
-    public PelaajaTest() {
-        laiva = new Laiva(5);
-        pelaaja = new Henkilo();
+    public PlayerTest() {
+        ship = new Ship(5);
+        player = new Person();
         int[] x = {4, 5, 6, 7, 8};
         int[] y = {3, 3, 3, 3, 3};
-        pelaaja.addShip(laiva, x, y);
-        Laiva paatti = new Laiva(1);
+        player.addShip(ship, x, y);
+        Ship paatti = new Ship(1);
         int[] k = {6};
         int[] h = {6};
-        pelaaja.addShip(paatti, k, h);
+        player.addShip(paatti, k, h);
     }
 
     @BeforeClass
@@ -45,159 +42,159 @@ public class PelaajaTest {
 
     @Test
     public void uudenLaivanAsettaminenOnnistuu() {
-        Laiva botski = new Laiva(4);
+        Ship botski = new Ship(4);
         int[] x = {8, 8, 8, 8};
         int[] y = {6, 7, 8, 9};
-        assertEquals(true, pelaaja.addShip(botski, x, y));
+        assertEquals(true, player.addShip(botski, x, y));
 
     }
 
     @Test
     public void tyhjanLaivanAsettaminenEiOnnistu() {
-        Laiva botski = new Laiva(0);
+        Ship botski = new Ship(0);
         int[] x = {};
         int[] y = {};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void tyhjanLaivanAsettaminenEiOnnistuVaikkaLaivanKokoYliNolla() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {};
         int[] y = {};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
 
     }
 
     @Test
     public void pienemmanKuinHalutunLaivanAsettaminenEiOnnistu() {
-        Laiva botski = new Laiva(2);
+        Ship botski = new Ship(2);
         int[] x = {2};
         int[] y = {8};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void suuremmanKuinHalutunLaivanAsettaminenEiOnnistu() {
-        Laiva botski = new Laiva(2);
+        Ship botski = new Ship(2);
         int[] x = {7, 8, 9};
         int[] y = {9, 9, 9};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
 
     }
 
     @Test
     public void ohiAmpuminenEiOsu() {
-        assertEquals(null, pelaaja.shoot(4, 2));
-        assertEquals(null, pelaaja.shoot(3, 3));
+        assertEquals(null, player.shoot(4, 2));
+        assertEquals(null, player.shoot(3, 3));
     }
 
     @Test
     public void ampuminenOsuu() {
-        assertEquals(laiva, pelaaja.shoot(4, 3));
+        assertEquals(ship, player.shoot(4, 3));
     }
 
     @Test
     public void laivaUppoaa() {
-        pelaaja.shoot(4, 3);
-        pelaaja.shoot(5, 3);
-        pelaaja.shoot(6, 3);
-        pelaaja.shoot(7, 3);
-        pelaaja.shoot(8, 3);
-        assertEquals(true, laiva.didItSink());
+        player.shoot(4, 3);
+        player.shoot(5, 3);
+        player.shoot(6, 3);
+        player.shoot(7, 3);
+        player.shoot(8, 3);
+        assertEquals(true, ship.didItSink());
     }
 
     @Test
     public void pelaajaHaviaaVastaKunViimeinenLaivaUppoaa() {
-        pelaaja.shoot(4, 3);
-        pelaaja.shoot(5, 3);
-        pelaaja.shoot(6, 3);
-        pelaaja.shoot(7, 3);
-        pelaaja.shoot(8, 3);
-        assertEquals(false, pelaaja.didPlayerLose());
-        pelaaja.shoot(6, 6);
-        assertEquals(true, pelaaja.didPlayerLose());
+        player.shoot(4, 3);
+        player.shoot(5, 3);
+        player.shoot(6, 3);
+        player.shoot(7, 3);
+        player.shoot(8, 3);
+        assertEquals(false, player.didPlayerLose());
+        player.shoot(6, 6);
+        assertEquals(true, player.didPlayerLose());
     }
 
     @Test
     public void uudenLaivanAsettaminenOnnistuuMyosKulmiin() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] i = {9};
         int[] j = {9};
-        assertEquals(true, pelaaja.addShip(botski, i, j));
+        assertEquals(true, player.addShip(botski, i, j));
         int[] i2 = {0};
         int[] j2 = {0};
-        assertEquals(true, pelaaja.addShip(botski, i2, j2));
+        assertEquals(true, player.addShip(botski, i2, j2));
         int[] i3 = {0};
         int[] j3 = {9};
-        assertEquals(true, pelaaja.addShip(botski, i3, j3));
+        assertEquals(true, player.addShip(botski, i3, j3));
         int[] i4 = {9};
         int[] j4 = {0};
-        assertEquals(true, pelaaja.addShip(botski, i4, j4));
+        assertEquals(true, player.addShip(botski, i4, j4));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniYlos() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {6};
         int[] y = {7};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniAlas() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {6};
         int[] y = {5};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniOikealle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {7};
         int[] y = {6};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniVasemmalle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {5};
         int[] y = {6};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniYlaoikealle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {7};
         int[] y = {7};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniYlavasemmalle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {5};
         int[] y = {7};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniAlaoikealle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {7};
         int[] y = {5};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
     @Test
     public void laivaaEiSaaToiseenKiinniAlavasemmalle() {
-        Laiva botski = new Laiva(1);
+        Ship botski = new Ship(1);
         int[] x = {5};
         int[] y = {5};
-        assertEquals(false, pelaaja.addShip(botski, x, y));
+        assertEquals(false, player.addShip(botski, x, y));
     }
 
 }

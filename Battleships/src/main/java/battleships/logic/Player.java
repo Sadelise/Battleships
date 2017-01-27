@@ -2,28 +2,28 @@ package battleships.logic;
 
 import java.util.*;
 
-public abstract class Pelaaja {
+public abstract class Player {
 
-    private ArrayList<Laiva> ships;
-    private Laiva[][] locations;
+    private ArrayList<Ship> ships;
+    private Ship[][] locations;
 
-    public Pelaaja() {
+    public Player() {
         ships = new ArrayList<>();
-        locations = new Laiva[10][10];
+        locations = new Ship[10][10];
     }
 
-    abstract public Laiva shoot(int x, int y);
+    abstract public Ship shoot(int x, int y);
 
-    public ArrayList<Laiva> getShips() {
+    public ArrayList<Ship> getShips() {
         return ships;
     }
 
-    public Laiva[][] getLocations() {
+    public Ship[][] getLocations() {
         return locations;
     }
 
     public Boolean didPlayerLose() {
-        for (Laiva laiva : ships) {
+        for (Ship laiva : ships) {
             if (!laiva.didItSink()) {
                 return false;
             }
@@ -31,7 +31,7 @@ public abstract class Pelaaja {
         return true;
     }
 
-    public Boolean addShip(Laiva laiva, int[] x, int[] y) {
+    public Boolean addShip(Ship laiva, int[] x, int[] y) {
         if (shipPosition(laiva, x, y)
                 && laiva.getSize() == x.length
                 && x.length != 0
@@ -46,7 +46,7 @@ public abstract class Pelaaja {
         }
     }
 
-    private Boolean shipPosition(Laiva laiva, int[] x, int[] y) {
+    private Boolean shipPosition(Ship laiva, int[] x, int[] y) {
         for (int i = 0; i < x.length; i++) {
             if (!isSingleCoordinateAcceptable(laiva, x[i], y[i])) {
                 return false;
@@ -55,7 +55,7 @@ public abstract class Pelaaja {
         return true;
     }
 
-    private Boolean isSingleCoordinateAcceptable(Laiva laiva, int x, int y) {
+    private Boolean isSingleCoordinateAcceptable(Ship laiva, int x, int y) {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
                 if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {

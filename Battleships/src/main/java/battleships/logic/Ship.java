@@ -1,11 +1,11 @@
 package battleships.logic;
 
-public class Laiva {
+public class Ship {
 
     private int size;
     private int hits;
 
-    public Laiva(int size) {
+    public Ship(int size) {
         this.size = size;
         this.hits = 0;
     }

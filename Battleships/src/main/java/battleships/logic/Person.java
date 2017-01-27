@@ -1,9 +1,9 @@
 package battleships.logic;
 
-public class Henkilo extends Pelaaja {
+public class Person extends Player {
 
     @Override
-    public Laiva shoot(int x, int y) {
+    public Ship shoot(int x, int y) {
         if (super.getLocations()[x][y] != null) {
             super.getLocations()[x][y].shoot();
             return super.getLocations()[x][y];

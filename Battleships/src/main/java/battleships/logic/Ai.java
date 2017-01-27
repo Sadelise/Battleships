@@ -1,9 +1,9 @@
 package battleships.logic;
 
-public class Tekoaly extends Pelaaja {
+public class Ai extends Player {
 
     @Override
-    public Laiva shoot(int x, int y) {
+    public Ship shoot(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
