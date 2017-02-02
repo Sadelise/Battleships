@@ -9,12 +9,10 @@ import static org.junit.Assert.*;
 
 public class AiTest {
 
-    private Battleships bs;
     private Ai ai;
 
     public AiTest() {
         ai = new Ai();
-        bs = new Battleships(1);
     }
 
     @BeforeClass
