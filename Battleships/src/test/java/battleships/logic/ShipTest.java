@@ -8,7 +8,9 @@ public class ShipTest {
     private Ship ship;
 
     public ShipTest() {
-        ship = new Ship(5);
+        int[] x = {4};
+        int[] y = {3};
+        ship = new Ship(5, x, y);
     }
 
     @Test

@@ -7,3 +7,4 @@ Päivä | Tunnit | Kuvaus
 23.01.2017 |0.5h| luokkakaavion piirtämistä
 25.01.2017 | 6h | Luokkien laiva ja pelaaja ohjelmointia + testien kirjoittamista
 26.01.2017 | 1h | Konfigurointia ja raporttien generointia
+28.01.2017 |0.5h| Pelaajatestejä

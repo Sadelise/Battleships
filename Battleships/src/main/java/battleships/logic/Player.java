@@ -12,7 +12,13 @@ public abstract class Player {
         locations = new Ship[10][10];
     }
 
-    abstract public Ship shoot(int x, int y);
+    public Ship shoot(int x, int y) {
+        if (locations[x][y] != null) {
+            locations[x][y].shoot();
+            return locations[x][y];
+        }
+        return null;
+    }
 
     public ArrayList<Ship> getShips() {
         return ships;
@@ -31,35 +37,35 @@ public abstract class Player {
         return true;
     }
 
-    public Boolean addShip(Ship laiva, int[] x, int[] y) {
-        if (shipPosition(laiva, x, y)
-                && laiva.getSize() == x.length
+    public Boolean addShip(Ship ship, int[] x, int[] y) {
+        if (validateShipPosition(ship, x, y)
+                && ship.getSize() == x.length
                 && x.length != 0
                 && shipPiecesAttached(x, y)) {
             for (int i = 0; i < x.length; i++) {
-                locations[x[i]][y[i]] = laiva;
+                locations[x[i]][y[i]] = ship;
             }
-            ships.add(laiva);
+            ships.add(ship);
             return true;
         } else {
             return false;
         }
     }
 
-    private Boolean shipPosition(Ship laiva, int[] x, int[] y) {
+    private Boolean validateShipPosition(Ship ship, int[] x, int[] y) {
         for (int i = 0; i < x.length; i++) {
-            if (!isSingleCoordinateAcceptable(laiva, x[i], y[i])) {
+            if (!isSingleCoordinateAcceptable(x[i], y[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    private Boolean isSingleCoordinateAcceptable(Ship laiva, int x, int y) {
+    private Boolean isSingleCoordinateAcceptable(int x, int y) {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
                 if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {
-                    if (locations[j][i] != null) {
+                    if (locations[j][i] != null || outOfBounds(x, y)) {
                         return false;
                     }
                 }
@@ -91,5 +97,12 @@ public abstract class Player {
             }
         }
         return true;
+    }
+
+    private boolean outOfBounds(int x, int y) {
+        if (!(x >= 0 && x < locations.length && y >= 0 && y < locations.length)) {
+            return true;
+        }
+        return false;
     }
 }
