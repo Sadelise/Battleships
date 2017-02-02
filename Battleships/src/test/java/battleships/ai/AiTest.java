@@ -1,4 +1,4 @@
-package battleships.logic;
+package battleships.ai;
 
 import org.junit.After;
 import org.junit.AfterClass;

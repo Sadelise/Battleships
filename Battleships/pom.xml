@@ -36,9 +36,11 @@
     <configuration>
         <targetClasses>
             <param>battleships.logic.*</param>
+	    <param>battleships.ai.*</param>
         </targetClasses>
         <targetTests>
             <param>battleships.logic.*</param>
+            <param>battleships.ai.*</param>
         </targetTests>
     </configuration>
 </plugin>

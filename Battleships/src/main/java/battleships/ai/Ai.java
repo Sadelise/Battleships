@@ -1,5 +1,6 @@
-package battleships.logic;
+package battleships.ai;
 
+import battleships.logic.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
