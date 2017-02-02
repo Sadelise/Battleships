@@ -9,5 +9,5 @@ Päivä | Tunnit | Kuvaus
 26.01.2017 | 1h | Konfigurointia ja raporttien generointia
 28.01.2017 |0.5h| Pelaajatestejä
 31.01.2017 | 2h | Tekoälyn toiminnallisuuden pohdintaa + rakentelua
-01.02.2017 | 6h | Ai ja Battleships luokan rakentelua, ShipBuilder luokan rakentelua, testejä
-02.02.2017 | 4h | Ai luokan rakentelua + korjailua + testejä
+01.02.2017 | 6h | Ai, Battleships ja ShipBuilder luokkien rakentelua, testejä
+02.02.2017 | 4h | Ai luokan rakentelua + korjailua + testejä + raporttien generointi
