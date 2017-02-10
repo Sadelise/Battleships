@@ -4,51 +4,74 @@ import battleships.logic.Player;
 import battleships.logic.Ship;
 import java.util.Random;
 
-class ShipBuilder {
+/**
+ * Class generates viable Ship Objects.
+ */
+public class ShipBuilder {
 
-    private Player ai;
     private Random guesser;
+    private int[] x;
+    private int[] y;
 
-    public ShipBuilder(Player ai, Random guesser) {
-        this.ai = ai;
-        this.guesser = guesser;
+    public ShipBuilder() {
+        this.guesser = new Random();
     }
 
-    public void buildShips(int amount, int biggest) {
+    /**
+     * Method initialises the production of several Ship Objects which are
+     * eventually placed into the location map of a player.
+     *
+     * @param player The player that will receive the ships
+     * @param amount The amount of ships that will be produced
+     * @param biggest The size of the biggest ship in the fleet
+     *
+     */
+    public void buildAllShips(Player player, int amount, int biggest) {
         int size = biggest;
         for (int i = 0; i < amount; i++) {
-            randomizeStartingCoordinate(size);
+            randomizeStartingCoordinate(size, player);
             if (i != 4) {
                 size--;
             }
         }
     }
 
-    private void randomizeStartingCoordinate(int size) {
+    private void randomizeStartingCoordinate(int size, Player player) {
         while (true) {
-            int x = guesser.nextInt(10);
-            int y = guesser.nextInt(10);
-            int direction = guesser.nextInt(2);
-            if (buildShip(x, y, direction, size)) {
+            int cx = guesser.nextInt(10);
+            int cy = guesser.nextInt(10);
+            int orientation = guesser.nextInt(2);
+            Ship ship = buildShip(cx, cy, orientation, size);
+            if (player.addShip(ship)) {
                 break;
             }
         }
     }
 
-    private Boolean buildShip(int x, int y, int direction, int size) {
-        int[] cx = new int[size];
-        int[] cy = new int[size];
+    /**
+     * Method creates a single ship according to parameters and returns it.
+     *
+     * @param cx The x coordinate of the Ships first piece
+     * @param cy The y coordinate of the Ships first piece
+     * @param orientation The orientation of the Ship
+     * @param size The size of the Ship
+     *
+     * @return The created Ship
+     */
+    public Ship buildShip(int cx, int cy, int orientation, int size) {
+        x = new int[size];
+        y = new int[size];
         for (int i = 0; i < size; i++) {
-            cx[i] = x;
-            cy[i] = y;
-            if (direction == 0) {
-                x++;
+            x[i] = cx;
+            y[i] = cy;
+            if (orientation == 0) {
+                cx++;
             }
-            if (direction == 1) {
-                y++;
+            if (orientation == 1) {
+                cy++;
             }
         }
-        return ai.addShip(new Ship(size, cx, cy), cx, cy);
+        return new Ship(size, x, y);
     }
 
 }

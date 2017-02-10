@@ -11,3 +11,8 @@ Päivä | Tunnit | Kuvaus
 31.01.2017 | 2h | Tekoälyn toiminnallisuuden pohdintaa + rakentelua
 01.02.2017 | 4h | Ai ja ShipBuilder luokkien rakentelua, testejä
 02.02.2017 | 3h | Ai luokan rakentelua + korjailua + testejä + raporttien generointi
+05.02.2017 | 2h | Toiminnallisuuden suunnittelua
+06.02.2017 | 4h | Toiminnallisuuden hienosäätöä + ohjelmointia + testejä
+08.02.2017 | 4h | Käyttöliittymän ohjelmointia
+09.02.2017 | 2h | Hienosäätöä, JavaDoc
+10.02.2017 | 2h | Testejä, hienosäätöä, raporttien generoinnit

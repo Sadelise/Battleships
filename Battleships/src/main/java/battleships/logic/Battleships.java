@@ -2,59 +2,114 @@ package battleships.logic;
 
 import battleships.ai.Ai;
 
+/**
+ * Class contains the main functionality of the Battleships game.
+ */
 public class Battleships {
 
+    private Player player1;
+    private Player player2;
     private Player inTurn;
     private Player opponent;
+    private int fleetSize;
 
-    public Battleships(int mode) {
+    public Battleships(int mode, int fleetSize) {
+        this.fleetSize = fleetSize;
         if (mode == 1) {
-            inTurn = new Person();
-            opponent = new Ai();
+            player1 = new Person();
+            player2 = new Ai(fleetSize);
+            inTurn = player1;
+            opponent = player2;
         }
     }
 
+    /**
+     * Method returns player1.
+     *
+     * @return player1
+     */
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    /**
+     * Method returns player2.
+     *
+     * @return player2
+     */
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    /**
+     * Method checks if the opponent lost.
+     *
+     * @return True if the opponent lost, otherwise false
+     */
     public Boolean didCurrentPlayerWin() {
         return opponent.didPlayerLose();
     }
 
+    /**
+     * Method calls the shoot() method of the opponent to shoot at the
+     * opponent's fleet. If the player in turn is AI the method will replace the
+     * parameter values with coordinates returned by the AI class.
+     *
+     * @param x The x coordinate of the square the player wants to shoot
+     * @param y The y coordinate of the square the player wants to shoot
+     *
+     * @return The Ship that was hit or null if no Ship was hit
+     */
     public Ship play(int x, int y) {
-        Ship ship = inTurn.shoot(x, y);
-        if (ship == null) {
-            changeTurn();
+        Ship ship;
+        if (inTurn instanceof Ai) {
+            Ai ai = (Ai) inTurn;
+            x = ai.getShootingCoordinates()[0];
+            y = ai.getShootingCoordinates()[1];
         }
+        ship = opponent.shoot(x, y);
+        giveFeedBack(ship, x, y);
+
         return ship;
+    }
+
+    private void giveFeedBack(Ship ship, int x, int y) {
+        if (ship == null) {
+            inTurn.feedback(false, null, x, y);
+            changeTurn();
+        } else if (!ship.didItSink()) {
+            inTurn.feedback(true, null, x, y);
+        } else if (ship.didItSink()) {
+            inTurn.feedback(true, ship, x, y);
+        }
     }
 
     private void changeTurn() {
         Player temp = inTurn;
         inTurn = opponent;
         opponent = temp;
-        if (inTurn instanceof Ai) {
-            aiPlay();
-        }
     }
 
-    private void aiPlay() {
-        Ai ai = (Ai) inTurn;
-        int x = ai.getShootingCoordinates()[0];
-        int y = ai.getShootingCoordinates()[1];
-        Ship ship = inTurn.shoot(x, y);
-        if (ship == null) {
-            ai.feedback(false, false, x, y);
-            changeTurn();
-        } else {
-            ai.feedback(true, ship.didItSink(), x, y);
-            aiPlay();
+    /**
+     * Method delivers a new Ship to player1 until player1's fleet is full, then
+     * continues to deliver new Ships to player2 until their fleet is full.
+     * Method will not add new ships to an AI player.
+     *
+     * @param ship The ship in process of being delivered
+     *
+     * @return True if the Ship was successfully added to the fleet of a player,
+     * otherwise false
+     */
+    public Boolean newShip(Ship ship) {
+        Player player = inTurn;
+        if (inTurn.getShips().size() >= fleetSize) {
+            player = opponent;
         }
-    }
-
-    public int[][] getAiShots() {
-        if (opponent instanceof Ai) {
-            Ai ai = (Ai) opponent;
-            return ai.getEnemyMap();
-        } else {
-            return null;
+        if (!(player instanceof Ai)) {
+            if (player.addShip(ship)) {
+                return true;
+            }
         }
+        return false;
     }
 }

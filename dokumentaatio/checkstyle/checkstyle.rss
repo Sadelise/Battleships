@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 8,
+      <title>File: 10,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -60,21 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Ai.java">battleships/logic/Ai.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.ShipBuilder.java">battleships/logic/ShipBuilder.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.ai.ShipBuilder.java">battleships/ai/ShipBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -116,6 +102,34 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#battleships.ui.SetShipsGUI.java">battleships/ui/SetShipsGUI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#battleships.ai.Ai.java">battleships/ai/Ai.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#battleships.logic.Battleships.java">battleships/logic/Battleships.java</a>
                 </td>
                 <td>
@@ -130,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.ui.UserInterface.java">battleships/ui/UserInterface.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.ui.SetShipsListener.java">battleships/ui/SetShipsListener.java</a>
                 </td>
                 <td>
                   0
@@ -145,6 +159,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#battleships.battleships.Main.java">battleships/battleships/Main.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#battleships.ui.MainGUI.java">battleships/ui/MainGUI.java</a>
                 </td>
                 <td>
                   0

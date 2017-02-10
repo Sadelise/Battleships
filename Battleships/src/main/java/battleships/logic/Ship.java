@@ -1,5 +1,9 @@
 package battleships.logic;
 
+/**
+ * Class contains the location and size information of a ship and records when
+ * players manage to guess the ships location correctly.
+ */
 public class Ship {
 
     private int[] x;
@@ -14,22 +18,49 @@ public class Ship {
         this.y = y;
     }
 
+    /**
+     * Method increases the hit counter by one.
+     */
     public void shoot() {
         hits++;
     }
 
+    /**
+     * Method checks if there are more or equal amount of hits on the ship than
+     * there are pieces of the ship.
+     *
+     * @return True if there are more or equal amount of hits than the are
+     * pieces, otherwise false
+     */
     public Boolean didItSink() {
         return size <= hits;
     }
 
+    /**
+     * Method returns the size of the Ship.
+     *
+     * @return Size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Method returns the array containing all the x coordinates for the ship
+     * sections.
+     *
+     * @return Array of integers, marking the x coordinates
+     */
     public int[] getXcoordinates() {
         return x;
     }
 
+    /**
+     * Method returns the array containing all the y coordinates for the ship
+     * sections.
+     *
+     * @return Array of integers, marking the y coordinates
+     */
     public int[] getYcoordinates() {
         return y;
     }

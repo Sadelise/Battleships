@@ -2,16 +2,45 @@ package battleships.logic;
 
 import java.util.*;
 
+/**
+ * Class contains methods for managing the players fleet and status.
+ */
 public abstract class Player {
 
     private ArrayList<Ship> ships;
     private Ship[][] locations;
+    private int[][] enemyMap;
 
     public Player() {
         ships = new ArrayList<>();
         locations = new Ship[10][10];
+        enemyMap = new int[10][10];
     }
 
+    /**
+     * Method receives the results of latest turn as parameters and updates the
+     * class variables accordingly.
+     *
+     * @param hit True if the last coordinates returned contained an enemy ship
+     * @param ship Contains the enemy ship that was sunk, otherwise null
+     * @param x Contains the x coordinate that was last played
+     * @param y Contains the y coordinate that was last played
+     *
+     */
+    public abstract void feedback(Boolean hit, Ship ship, int x, int y);
+
+    /**
+     * Method compares the coordinates received as variables to the location map
+     * of player's fleet. If the locations contains a Ship the method will call
+     * the shoot method of that particular Ship.
+     *
+     * @see battleships.logic.Ship#shoot()
+     *
+     * @param x Contains the x coordinate the opponent guessed
+     * @param y Contains the y coordinate the opponent guessed
+     *
+     * @return Ship Object that was hit or null
+     */
     public Ship shoot(int x, int y) {
         if (locations[x][y] != null) {
             locations[x][y].shoot();
@@ -20,24 +49,61 @@ public abstract class Player {
         return null;
     }
 
+    /**
+     * Method returns a list containing the player fleet of Ships.
+     *
+     * @return List of Ship Objects
+     */
     public ArrayList<Ship> getShips() {
         return ships;
     }
 
+    /**
+     * Method returns the array containing the locations of the players fleet.
+     *
+     * @return Array of Ships showing the Ship locations
+     */
     public Ship[][] getLocations() {
         return locations;
     }
 
+    /**
+     * Method returns the array containing all the locations the player has
+     * guessed.
+     *
+     * @return Array of integers, marking the guessed locations
+     */
+    public int[][] getEnemyMap() {
+        return enemyMap;
+    }
+
+    /**
+     * Method iterates through players Ships and checks if they have sunk.
+     *
+     * @return True if all the Ships have sunk, otherwise false
+     */
     public Boolean didPlayerLose() {
-        for (Ship laiva : ships) {
-            if (!laiva.didItSink()) {
-                return false;
+        if (!ships.isEmpty()) {
+            for (Ship laiva : ships) {
+                if (!laiva.didItSink()) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
-    public Boolean addShip(Ship ship, int[] x, int[] y) {
+    /**
+     * Method adds the parameter Ship to the list of Ships and adds its location
+     * information to the map after making sure the Ship is valid.
+     *
+     * @param ship The ship intended to be added to the players fleet
+     *
+     * @return True if the ship was added, otherwise false
+     */
+    public Boolean addShip(Ship ship) {
+        int[] x = ship.getXcoordinates();
+        int[] y = ship.getYcoordinates();
         if (validateShipPosition(ship, x, y)
                 && ship.getSize() == x.length
                 && x.length != 0
@@ -65,7 +131,8 @@ public abstract class Player {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
                 if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {
-                    if (locations[j][i] != null || outOfBounds(x, y)) {
+                    if (locations[j][i] != null
+                            || !(x >= 0 && x < locations.length && y >= 0 && y < locations.length)) {
                         return false;
                     }
                 }
@@ -78,7 +145,7 @@ public abstract class Player {
         if (x.length > 1) {
             int changes[];
             int stays[];
-            int staysAt = 0;
+            int staysAt;
             if (y[0] == y[1]) {
                 staysAt = y[0];
                 stays = y;
@@ -99,10 +166,22 @@ public abstract class Player {
         return true;
     }
 
-    private boolean outOfBounds(int x, int y) {
-        if (!(x >= 0 && x < locations.length && y >= 0 && y < locations.length)) {
-            return true;
+    /**
+     * Method automatically changes the values of squares on enemy map adjacent
+     * to a sunken ship to -1.
+     *
+     * @param ship The sunken Ship
+     */
+    public void negateSurroundingAreaAfterSinking(Ship ship) {
+        for (int i = 0; i < ship.getXcoordinates().length; i++) {
+            for (int y = ship.getYcoordinates()[i] - 1; y <= ship.getYcoordinates()[i] + 1; y++) {
+                for (int x = ship.getXcoordinates()[i] - 1; x <= ship.getXcoordinates()[i] + 1; x++) {
+                    if (x >= 0 && y >= 0 && x < enemyMap.length && y < enemyMap.length
+                            && enemyMap[x][y] == 0) {
+                        enemyMap[x][y] = -1;
+                    }
+                }
+            }
         }
-        return false;
     }
 }

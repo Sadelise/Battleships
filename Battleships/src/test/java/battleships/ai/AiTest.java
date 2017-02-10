@@ -1,5 +1,6 @@
 package battleships.ai;
 
+import battleships.logic.Ship;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,7 +13,7 @@ public class AiTest {
     private Ai ai;
 
     public AiTest() {
-        ai = new Ai();
+        ai = new Ai(6);
     }
 
     @BeforeClass
@@ -45,35 +46,39 @@ public class AiTest {
 
     @Test
     public void GivesAdjacentCoordinatesAfterAHit() {
-        ai.feedback(true, false, 0, 0);
+        ai.feedback(true, null, 0, 0);
         int[] c = ai.getShootingCoordinates();
         assertTrue((c[0] == 0 && c[1] == 1) || (c[0] == 1 && c[1] == 0));
     }
 
     @Test
-    public void GivesAdjacentCoordinatesAfterTwoHits() {
-        ai.feedback(true, false, 5, 6);
-        ai.feedback(true, false, 4, 6);
+    public void GivesEndCoordinatesAfterTwoHits() {
+        ai.feedback(true, null, 5, 6);
+        ai.feedback(true, null, 4, 6);
         int[] c = ai.getShootingCoordinates();
+        System.out.println(c[0]);
+        System.out.println(c[1]);
         assertTrue((c[0] == 3 && c[1] == 6)
-                || (c[0] == 6 && c[1] == 6)
-                || (c[0] == 4 && c[1] == 7)
-                || (c[0] == 5 && c[1] == 7)
-                || (c[0] == 4 && c[1] == 5)
-                || (c[0] == 5 && c[1] == 5));
+                || (c[0] == 6 && c[1] == 6));
     }
 
     @Test
-    public void givesRandomCoordinatesAfterSinkingOpponent() {
-        ai.feedback(true, false, 5, 6);
-        ai.feedback(true, true, 4, 6);
+    public void neverShootsCoordinatesAdjacentToSunkenShip() {
+        ai.feedback(true, null, 5, 6);
+        int[] x = {4};
+        int[] y = {6};
+        ai.feedback(true, new Ship(1, x, y), 4, 6);
         int[] c = ai.getShootingCoordinates();
         assertFalse((c[0] == 3 && c[1] == 6)
                 || (c[0] == 6 && c[1] == 6)
+                || (c[0] == 3 && c[1] == 7)
                 || (c[0] == 4 && c[1] == 7)
                 || (c[0] == 5 && c[1] == 7)
+                || (c[0] == 6 && c[1] == 7)
+                || (c[0] == 3 && c[1] == 5)
                 || (c[0] == 4 && c[1] == 5)
-                || (c[0] == 5 && c[1] == 5));
+                || (c[0] == 5 && c[1] == 5)
+                || (c[0] == 6 && c[1] == 5));
     }
 
     @Test
@@ -81,7 +86,9 @@ public class AiTest {
         for (int i = 0; i < ai.getEnemyMap().length; i++) {
             for (int j = 0; j < ai.getEnemyMap().length; j++) {
                 if (i > 1 || j > 1) {
-                    ai.feedback(true, true, j, i);
+                    int[] x = {j};
+                    int[] y = {i};
+                    ai.feedback(true, new Ship(1, x, y), j, i);
                 }
             }
         }
@@ -94,7 +101,9 @@ public class AiTest {
         for (int i = 0; i < ai.getEnemyMap().length; i++) {
             for (int j = 0; j < ai.getEnemyMap().length; j++) {
                 if (i > 0 || j > 0) {
-                    ai.feedback(true, true, j, i);
+                    int[] x = {j};
+                    int[] y = {i};
+                    ai.feedback(true, new Ship(1, x, y), j, i);
                 }
             }
         }
@@ -104,7 +113,11 @@ public class AiTest {
 
     @Test
     public void negateOnlyChangesImmediateSurroundings() {
-        ai.feedback(true, true, 0, 0);
+        int[] x = {0};
+        int[] y = {0};
+        Ship ship = new Ship(1, x, y);
+        ai.feedback(true, ship, 7, 4);
+        ai.feedback(true, ship, 0, 0);
         int[][] c = ai.getEnemyMap();
         assertTrue(c[0][3] == 0);
         assertTrue(c[1][3] == 0);
@@ -117,7 +130,10 @@ public class AiTest {
 
     @Test
     public void negateChangesSurroundings() {
-        ai.feedback(true, true, 7, 4);
+        int[] x = {7};
+        int[] y = {4};
+        Ship ship = new Ship(1, x, y);
+        ai.feedback(true, ship, 7, 4);
         int[][] m = ai.getEnemyMap();
         assertTrue(m[6][3] == -1);
         assertTrue(m[6][4] == -1);
@@ -127,5 +143,21 @@ public class AiTest {
         assertTrue(m[8][5] == -1);
         assertTrue(m[7][5] == -1);
         assertTrue(m[7][3] == -1);
+    }
+
+    @Test
+    public void feedBackChangesMap() {
+        assertEquals(0, ai.getEnemyMap()[9][9]);
+        ai.feedback(true, null, 9, 9);
+        assertEquals(1, ai.getEnemyMap()[9][9]);
+        ai.feedback(false, null, 0, 5);
+        assertEquals(-1, ai.getEnemyMap()[0][5]);
+        int[] x = {0};
+        int[] y = {0};
+        ai.feedback(true, new Ship(1, x, y), 0, 0);
+        assertEquals(1, ai.getEnemyMap()[0][0]);
+        assertEquals(-1, ai.getEnemyMap()[0][1]);
+        assertEquals(-1, ai.getEnemyMap()[1][0]);
+        assertEquals(-1, ai.getEnemyMap()[1][1]);
     }
 }

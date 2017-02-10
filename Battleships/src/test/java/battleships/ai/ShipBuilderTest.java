@@ -1,7 +1,6 @@
 package battleships.ai;
 
 import battleships.logic.Player;
-import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,8 +14,8 @@ public class ShipBuilderTest {
     private Player ai;
 
     public ShipBuilderTest() {
-        ai = new Ai();
-        sb = new ShipBuilder(ai, new Random());
+        ai = new Ai(6);
+        sb = new ShipBuilder();
     }
 
     @BeforeClass
@@ -38,21 +37,21 @@ public class ShipBuilderTest {
     @Test
     public void BuildsASmallShip() {
         int ships = ai.getShips().size();
-        sb.buildShips(1, 1);
+        sb.buildAllShips(ai, 1, 1);
         assertEquals(ships + 1, ai.getShips().size());
     }
 
     @Test
     public void BuildsABigShip() {
         int ships = ai.getShips().size();
-        sb.buildShips(1, 5);
+        sb.buildAllShips(ai, 1, 5);
         assertEquals(ships + 1, ai.getShips().size());
     }
 
     @Test
     public void BuildsManyShips() {
         int ships = ai.getShips().size();
-        sb.buildShips(6, 5);
+        sb.buildAllShips(ai, 6, 5);
         assertEquals(ships + 6, ai.getShips().size());
     }
 }
