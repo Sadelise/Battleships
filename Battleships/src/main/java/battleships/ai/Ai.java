@@ -19,6 +19,12 @@ public class Ai extends Player {
     private List<Integer> acceptableY;
     private Random guesser;
 
+    /**
+     * Method constructs an implementation of the class and initialises
+     * variables.
+     *
+     * @param shipLimit The amount of ships the Ai will place on its map.
+     */
     public Ai(int shipLimit) {
         guesser = new Random();
         ShipBuilder sb = new ShipBuilder();

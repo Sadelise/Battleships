@@ -11,6 +11,14 @@ public class Ship {
     private int size;
     private int hits;
 
+    /**
+     * Method constructs an implementation of the class and initialises
+     * variables.
+     *
+     * @param size The amount of slots in the array the ship must occupy
+     * @param x The x coordinates of the slots in the array the ship occupies.
+     * @param y The y coordinates of the slots in the array the ship occupies.
+     */
     public Ship(int size, int[] x, int[] y) {
         this.size = size;
         this.hits = 0;

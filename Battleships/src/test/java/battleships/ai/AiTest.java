@@ -56,8 +56,6 @@ public class AiTest {
         ai.feedback(true, null, 5, 6);
         ai.feedback(true, null, 4, 6);
         int[] c = ai.getShootingCoordinates();
-        System.out.println(c[0]);
-        System.out.println(c[1]);
         assertTrue((c[0] == 3 && c[1] == 6)
                 || (c[0] == 6 && c[1] == 6));
     }

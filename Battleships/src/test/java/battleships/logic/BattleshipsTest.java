@@ -109,7 +109,7 @@ public class BattleshipsTest {
         for (int i = 0; i < x.length; i++) {
             game.play(x[i], y[i]);
         }
-        assertTrue(game.didCurrentPlayerWin());
+        assertTrue(game.didPlayerWin(game.getPlayer1()));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class BattleshipsTest {
                 break;
             }
         }
-        assertTrue(bs.didCurrentPlayerWin());
+        assertTrue(bs.didPlayerWin(bs.getPlayer2()));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class BattleshipsTest {
         int x[] = {0, 1, 2, 3, 4};
         int y[] = {5, 5, 5, 5, 5};
         game.newShip(new Ship(5, x, y));
-        assertFalse(game.didCurrentPlayerWin());
+        assertFalse(game.didPlayerWin(game.getPlayer1()));
         Ship[][] locations = game.getPlayer2().getLocations();
         for (int i = 0; i < locations.length; i++) {
             for (int j = 0; j < locations.length; j++) {
@@ -142,7 +142,7 @@ public class BattleshipsTest {
                 }
             }
         }
-        assertFalse(game.didCurrentPlayerWin());
+        assertFalse(game.didPlayerWin(game.getPlayer2()));
 
     }
 }

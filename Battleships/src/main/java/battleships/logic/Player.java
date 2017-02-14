@@ -11,6 +11,10 @@ public abstract class Player {
     private Ship[][] locations;
     private int[][] enemyMap;
 
+    /**
+     * Method constructs an implementation of the class and initialises
+     * variables.
+     */
     public Player() {
         ships = new ArrayList<>();
         locations = new Ship[10][10];

@@ -10,9 +10,13 @@ public class MainGUI implements Runnable {
     private JFrame frame;
     private Battleships game;
     private SetShipsGUI start;
+    private GamePlayGUI play;
+    private int mode;
 
-    public MainGUI(Battleships game) {
+    public MainGUI(Battleships game, int mode) {
         this.game = game;
+        this.mode = mode;
+
     }
 
     @Override
@@ -21,6 +25,7 @@ public class MainGUI implements Runnable {
         frame.setPreferredSize(new Dimension(200, 200));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         start = new SetShipsGUI(this, game);
+        play = new GamePlayGUI(this, game, mode);
         switchTo("start");
     }
 
@@ -35,6 +40,15 @@ public class MainGUI implements Runnable {
             frame.pack();
             frame.setVisible(true);
         }
+        if (windowName.equals("play")) {
+            play.run();
+            frame = play.getFrame();
+            frame.pack();
+            frame.setVisible(true);
+        }
+    }
 
+    public void exit() {
+        System.exit(0);
     }
 }

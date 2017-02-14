@@ -17,11 +17,15 @@
         <version>4.12</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>Layout</groupId>
-        <artifactId>MigLayout</artifactId>
-      <version>3.5.5</version>
-    </dependency>
+
+
+	<!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
+	<dependency>
+  	  <groupId>com.miglayout</groupId>
+  	  <artifactId>miglayout</artifactId>
+   	 <version>3.5.5</version>
+	</dependency>
+
 </dependencies>
 
 <build>

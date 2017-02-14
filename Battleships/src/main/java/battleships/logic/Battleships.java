@@ -13,6 +13,15 @@ public class Battleships {
     private Player opponent;
     private int fleetSize;
 
+    /**
+     * Method constructs an implementation of the class and initialises
+     * variables according to parameters.
+     *
+     * @param mode Number that decides if the game initialises as human vs ai or
+     * human vs human,
+     * @param fleetSize The amount of ships that each player can have in their
+     * fleet.
+     */
     public Battleships(int mode, int fleetSize) {
         this.fleetSize = fleetSize;
         if (mode == 1) {
@@ -42,12 +51,27 @@ public class Battleships {
     }
 
     /**
-     * Method checks if the opponent lost.
+     * Method returns player whose turn it is.
      *
+     * @return Player
+     */
+    public Player getPlayerInTurn() {
+        return inTurn;
+    }
+
+    /**
+     * Method checks if the player given as parameter has won.
+     *
+     * @param player The player whose situation is requested
+     * 
      * @return True if the opponent lost, otherwise false
      */
-    public Boolean didCurrentPlayerWin() {
-        return opponent.didPlayerLose();
+    public Boolean didPlayerWin(Player player) {
+        if (player == player1) {
+            return player2.didPlayerLose();
+        } else {
+            return player1.didPlayerLose();
+        }
     }
 
     /**

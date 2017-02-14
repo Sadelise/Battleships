@@ -5,5 +5,10 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <suppress files="nothing.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="Main.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="GamePlayGUI.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="GamePlayListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="MainGUI.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="SetShipsGUI.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="SetShipsListener.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

@@ -13,6 +13,10 @@ public class ShipBuilder {
     private int[] x;
     private int[] y;
 
+    /**
+     * Method constructs an implementation of the class and initialises
+     * variables.
+     */
     public ShipBuilder() {
         this.guesser = new Random();
     }
@@ -30,7 +34,7 @@ public class ShipBuilder {
         int size = biggest;
         for (int i = 0; i < amount; i++) {
             randomizeStartingCoordinate(size, player);
-            if (i != 4) {
+            if (i != 2) {
                 size--;
             }
         }
