@@ -238,4 +238,20 @@ public class PlayerTest {
         }
         assertArrayEquals(map, player.getEnemyMap());
     }
+
+    @Test
+    public void theEnemyMapIsUpdatedCorrectly() {
+        int[] x = {0};
+        int[] y = {0};
+        player.feedback(true, new Ship(1, x, y), 0, 0);
+        assertEquals(1, player.getEnemyMap()[0][0]);
+        assertEquals(-1, player.getEnemyMap()[0][1]);
+        assertEquals(-1, player.getEnemyMap()[1][1]);
+        assertEquals(-1, player.getEnemyMap()[1][0]);
+        player.feedback(true, null, 2, 2);
+        assertEquals(1, player.getEnemyMap()[2][2]);
+        player.feedback(false, null, 3, 3);
+        assertEquals(-1, player.getEnemyMap()[3][3]);
+
+    }
 }

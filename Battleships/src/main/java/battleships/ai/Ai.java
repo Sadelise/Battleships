@@ -79,7 +79,7 @@ public class Ai extends Player {
             shipWasHit = false;
             destroyedX.clear();
             destroyedY.clear();
-        };
+        }
     }
 
     private void acceptableCoordinates() {

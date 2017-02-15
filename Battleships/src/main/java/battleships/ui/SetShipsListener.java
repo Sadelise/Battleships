@@ -20,9 +20,11 @@ public class SetShipsListener implements ActionListener {
     private int direction;
     private JButton pressed;
     private final JLabel error;
-    private int mode;
+    private final int mode;
+    private JLabel playerLabel;
+    private Battleships game;
 
-    public SetShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error) {
+    public SetShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error, JLabel playerLabel) {
         this.main = main;
         this.buttons = buttons;
         this.buttonMap = buttonMap;
@@ -31,14 +33,23 @@ public class SetShipsListener implements ActionListener {
         this.error = error;
         error.setForeground(Color.red);
         this.mode = main.getGame().getMode();
+        this.playerLabel = playerLabel;
+        this.game = main.getGame();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        shipPlacement(e);
+        chosenShip(e);
 
         if (e.getSource() == buttons.get("start")) {
-            main.switchTo(new GamePlayGUI(main));
+            if (game.getMode() == 1 || game.hasPlayerFinishedSettingShips(game.getPlayer2())) {
+                main.switchTo(new GamePlayGUI(main));
+            } else if (game.hasPlayerFinishedSettingShips(game.getPlayer1()) && (!playerLabel.getText().equals("Player 2"))) {
+                resetButtons();
+                playerLabel.setText("Player 2");
+            } else {
+                error.setText("You must set all the available ships.");
+            }
         }
 
         for (int i = 0; i < buttonMap.length; i++) {
@@ -66,7 +77,7 @@ public class SetShipsListener implements ActionListener {
         }
     }
 
-    private void shipPlacement(ActionEvent e) {
+    private void chosenShip(ActionEvent e) {
         if (e.getSource() == buttons.get("boat5")) {
             size = 5;
             pressed = buttons.get("boat5");
@@ -105,6 +116,17 @@ public class SetShipsListener implements ActionListener {
                 direction = 0;
                 buttons.get("toggleDirection").setText("horizontal");
             }
+        }
+    }
+
+    private void resetButtons() {
+        for (JButton[] cbuttons : buttonMap) {
+            for (JButton b : cbuttons) {
+                b.setEnabled(true);
+            }
+        }
+        for (JButton button : buttons.values()) {
+            button.setEnabled(true);
         }
     }
 }

@@ -5,10 +5,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
 public class GamePlayGUI extends GUI implements Runnable {
@@ -27,7 +25,7 @@ public class GamePlayGUI extends GUI implements Runnable {
     @Override
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
-                "",
+                "fill",
                 "[]20[]",
                 "[]20[]"));
         container.add(panel);

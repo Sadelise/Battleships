@@ -8,7 +8,10 @@
     <suppress files="Main.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="GamePlayGUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="GamePlayListener.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="MainGUI.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="ControlGUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="SetShipsGUI.java" checks="[a-zA-Z0-9]*"/>
     <suppress files="SetShipsListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="MenuGUI.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="MainMenuListener.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="GUI.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

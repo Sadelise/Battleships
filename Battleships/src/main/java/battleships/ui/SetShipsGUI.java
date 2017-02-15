@@ -10,20 +10,20 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
 public class SetShipsGUI extends GUI implements Runnable {
-
+    
     private JFrame frame;
     private Battleships game;
     private ControlGUI main;
     private Map<String, JButton> buttons;
     private JButton[][] buttonMap;
     private int mode;
-
+    
     public SetShipsGUI(ControlGUI main) {
         this.main = main;
         this.game = main.getGame();
         this.buttons = new HashMap<>();
     }
-
+    
     @Override
     public void run() {
         frame = new JFrame("Battleships");
@@ -31,43 +31,45 @@ public class SetShipsGUI extends GUI implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         start(frame.getContentPane());
     }
-
+    
     public JFrame getFrame() {
         return frame;
     }
-
+    
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
-                "",
-                "[]20[]",
-                "[]20[]"));
+                "fill",
+                "50[]20[]100",
+                ""));
         container.add(panel);
         panel.setBackground(Color.white);
+        JLabel playerLabel = new JLabel("Player 1");
         JLabel instruction = new JLabel();
-        instruction.setText("<html><body><center><b>Welcome to Battleships!</b><br> To set your ships:<br>"
+        instruction.setText("<html><body><center><b>To set your ships:<br>"
                 + "- click the ship you want to place<br>"
                 + "- click the spot where you want your ship to start from.<br> "
                 + "- change the direction your boat is facing<br>by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
         JLabel error = new JLabel(" ");
-
+        
         JButton start = new JButton("Start");
         buttons.put("start", start);
-
+        
         panel.add(instruction, "skip, wrap, center");
-        panel.add(ships(), "height 600");
-        panel.add(coordinates(), "wrap, height 600");
-        panel.add(error, "wrap, span");
-        panel.add(start, "skip, center");
-
-        addActionListener(start, error);
+        panel.add(playerLabel, "skip, wrap, center");
+        panel.add(ships(), "");
+        panel.add(coordinates(), "center, wrap");
+        panel.add(error, "center, skip, wrap");
+        panel.add(start, "skip, center, wrap");
+        
+        addActionListener(start, error, playerLabel);
         return panel;
     }
-
+    
     public JPanel ships() {
         JPanel panel = new JPanel(new MigLayout());
         panel.setBackground(Color.white);
-
+        
         JButton boat5 = new JButton("*****");
         JButton boat4 = new JButton("****");
         JButton boat3a = new JButton("***");
@@ -92,7 +94,7 @@ public class SetShipsGUI extends GUI implements Runnable {
         panel.add(toggleDirection, "wrap, center");
         return panel;
     }
-
+    
     public JPanel coordinates() {
         JPanel panel = new JPanel(new MigLayout(
                 "",
@@ -100,7 +102,7 @@ public class SetShipsGUI extends GUI implements Runnable {
                 "[]0[]"));
         panel.setBackground(Color.white);
         buttonMap = new JButton[10][10];
-
+        
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 JButton button = new JButton();
@@ -113,12 +115,12 @@ public class SetShipsGUI extends GUI implements Runnable {
                 }
             }
         }
-
+        
         return panel;
     }
-
-    private void addActionListener(JButton start, JLabel error) {
-        SetShipsListener listener = new SetShipsListener(main, buttons, buttonMap, error);
+    
+    private void addActionListener(JButton start, JLabel error, JLabel playerLabel) {
+        SetShipsListener listener = new SetShipsListener(main, buttons, buttonMap, error, playerLabel);
         start.addActionListener(listener);
         for (JButton[] shipButtons : buttonMap) {
             for (JButton button : shipButtons) {

@@ -1,6 +1,7 @@
 package battleships.ui;
 
 import battleships.logic.Battleships;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -26,7 +27,6 @@ public class MenuGUI extends GUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Battleships");
-        frame.setPreferredSize(new Dimension(600, 450));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         start(frame.getContentPane());
     }
@@ -37,14 +37,12 @@ public class MenuGUI extends GUI implements Runnable {
 
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
+                "fill",
                 "",
-                "[]20[]",
-                "[]20[]"));
+                "100[]20[]0[]200"));
         container.add(panel);
         panel.setBackground(Color.white);
         JLabel welcome = new JLabel("Welcome to Battleships!");
-//        welcome.setFont(new Font("Serif", Font.PLAIN, 12));
-
         JButton singleGame = new JButton("Single player game");
         JButton doubleGame = new JButton("2 player game");
 

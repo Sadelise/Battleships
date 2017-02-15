@@ -19,7 +19,7 @@ public class ControlGUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Battleships");
-        frame.setPreferredSize(new Dimension(1000, 500));
+        frame.setPreferredSize(new Dimension(800, 500));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         switchTo(menu);
@@ -36,7 +36,8 @@ public class ControlGUI implements Runnable {
         }
         inUse = opening;
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(opening.start(frame));
+        opening.start(frame.getContentPane());
+
         frame.pack();
         frame.setVisible(true);
     }

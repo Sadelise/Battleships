@@ -108,10 +108,8 @@ public abstract class Player {
     public Boolean addShip(Ship ship) {
         int[] x = ship.getXcoordinates();
         int[] y = ship.getYcoordinates();
-        if (validateShipPosition(ship, x, y)
-                && ship.getSize() == x.length
-                && x.length != 0
-                && shipPiecesAttached(x, y)) {
+        if (validateShipPosition(ship, x, y) && ship.getSize() == x.length
+                && x.length != 0 && shipPiecesAttached(x, y)) {
             for (int i = 0; i < x.length; i++) {
                 locations[x[i]][y[i]] = ship;
             }
@@ -135,8 +133,7 @@ public abstract class Player {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
                 if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {
-                    if (locations[j][i] != null
-                            || !(x >= 0 && x < locations.length && y >= 0 && y < locations.length)) {
+                    if (locations[j][i] != null || !(withinBoundaries(x, y))) {
                         return false;
                     }
                 }
@@ -199,9 +196,6 @@ public abstract class Player {
      * false
      */
     public Boolean withinBoundaries(int x, int y) {
-        return y >= 0
-                && x >= 0
-                && y < enemyMap.length
-                && x < enemyMap.length;
+        return y >= 0 && x >= 0 && y < enemyMap.length && x < enemyMap.length;
     }
 }

@@ -63,7 +63,12 @@ public class Battleships {
     public Player getPlayerInTurn() {
         return inTurn;
     }
-    
+
+    /**
+     * Method returns the gamemode, 1 if human vs ai, 2 if human vs human.
+     *
+     * @return Player
+     */
     public int getMode() {
         return this.mode;
     }
@@ -146,5 +151,16 @@ public class Battleships {
             }
         }
         return false;
+    }
+
+    /**
+     * Method determines if player sent as parameter has a full fleet of ships.
+     *
+     * @param player The player in process of setting their ships
+     *
+     * @return True if the player has a full fleet of ships, otherwise false
+     */
+    public Boolean hasPlayerFinishedSettingShips(Player player) {
+        return player.getShips().size() >= fleetSize;
     }
 }
