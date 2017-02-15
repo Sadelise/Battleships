@@ -4,9 +4,6 @@ import battleships.logic.Battleships;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,35 +11,20 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
-public class GamePlayGUI implements Runnable {
+public class GamePlayGUI extends GUI implements Runnable {
 
-    private JFrame frame;
-    private Battleships game;
-    private MainGUI main;
-    private JButton[][] player1ButtonMap;
-    private JButton[][] player2ButtonMap;
-    private int mode;
+    private final ControlGUI main;
+    private final JButton[][] player1ButtonMap;
+    private final JButton[][] player2ButtonMap;
 
-    public GamePlayGUI(MainGUI main, Battleships game, int mode) {
+    public GamePlayGUI(ControlGUI main) {
         this.main = main;
-        this.game = game;
+        Battleships game = main.getGame();
         this.player1ButtonMap = new JButton[game.getPlayer1().getLocations().length][game.getPlayer1().getLocations().length];
         this.player2ButtonMap = new JButton[game.getPlayer2().getLocations().length][game.getPlayer2().getLocations().length];
-        this.mode = mode;
     }
 
     @Override
-    public void run() {
-        frame = new JFrame("Battleships");
-        frame.setPreferredSize(new Dimension(1000, 500));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        start(frame.getContentPane());
-    }
-
-    public JFrame getFrame() {
-        return frame;
-    }
-
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
                 "",
@@ -69,7 +51,7 @@ public class GamePlayGUI implements Runnable {
         panel.add(newGame, "center");
         panel.add(quit, "center, wrap");
 
-        GamePlayListener listener = new GamePlayListener(main, game, player1ButtonMap, player2ButtonMap, player1, player2, winner, newGame, quit, mode);
+        GamePlayListener listener = new GamePlayListener(main, player1ButtonMap, player2ButtonMap, player1, player2, winner, newGame, quit);
         addActionListener(listener, player1ButtonMap);
         addActionListener(listener, player2ButtonMap);
         newGame.addActionListener(listener);

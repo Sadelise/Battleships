@@ -13,20 +13,20 @@ import javax.swing.JLabel;
 
 class GamePlayListener implements ActionListener {
 
-    private MainGUI main;
-    private Battleships game;
-    private JButton[][] player1ButtonMap;
-    private JButton[][] player2ButtonMap;
-    private JLabel player1Label;
-    private JLabel player2Label;
-    private JLabel winner;
-    private JButton newGame;
-    private JButton quit;
-    private int mode;
+    private final ControlGUI main;
+    private final Battleships game;
+    private final JButton[][] player1ButtonMap;
+    private final JButton[][] player2ButtonMap;
+    private final JLabel player1Label;
+    private final JLabel player2Label;
+    private final JLabel winner;
+    private final JButton newGame;
+    private final JButton quit;
+    private final int mode;
 
-    GamePlayListener(MainGUI main, Battleships game, JButton[][] player1ButtonMap, JButton[][] player2ButtonMap, JLabel player1Label, JLabel player2Label, JLabel winner, JButton newGame, JButton quit, int mode) {
+    GamePlayListener(ControlGUI main, JButton[][] player1ButtonMap, JButton[][] player2ButtonMap, JLabel player1Label, JLabel player2Label, JLabel winner, JButton newGame, JButton quit) {
         this.main = main;
-        this.game = game;
+        this.game = main.getGame();
         this.newGame = newGame;
         this.player1Label = player1Label;
         this.player2Label = player2Label;
@@ -34,7 +34,7 @@ class GamePlayListener implements ActionListener {
         this.player2ButtonMap = player2ButtonMap;
         this.quit = quit;
         this.winner = winner;
-        this.mode = mode;
+        this.mode = main.getGame().getMode();
     }
 
     @Override
@@ -45,7 +45,7 @@ class GamePlayListener implements ActionListener {
             checkPlayerBoard(game.getPlayer2(), player2ButtonMap, e);
         }
         if (e.getSource() == newGame) {
-            main.switchTo("start");
+            main.switchTo(main.getMenu());
         }
         if (e.getSource() == quit) {
             main.exit();
@@ -56,20 +56,22 @@ class GamePlayListener implements ActionListener {
         for (int y = 0; y < buttonMap.length; y++) {
             for (int x = 0; x < buttonMap.length; x++) {
                 if (e.getSource() == buttonMap[x][y]) {
-                    Ship ship = game.play(x, y);
-                    changeBoard(player.getEnemyMap(), buttonMap);
-                    if (ship == null) {
-                        upDateLabels();
-                        if (mode == 1) {
-                            playAi();
-                        }
-                    } else if (ship.didItSink()) {
-                        if (game.didPlayerWin(player)) {
-                            endGame(player);
-                        }
-                    }
+                    playMove(x, y, player, buttonMap);
                 }
             }
+        }
+    }
+
+    private void playMove(int x, int y, Player player, JButton[][] buttonMap) {
+        Ship ship = game.play(x, y);
+        changeBoard(player.getEnemyMap(), buttonMap);
+        if (ship == null) {
+            upDateLabels();
+            if (mode == 1) {
+                playAi();
+            }
+        } else if (ship.didItSink() && game.didPlayerWin(player)) {
+            endGame(player);
         }
     }
 
@@ -79,10 +81,8 @@ class GamePlayListener implements ActionListener {
             changeBoard(game.getPlayer2().getEnemyMap(), player2ButtonMap);
             if (ship == null) {
                 break;
-            } else if (ship.didItSink()) {
-                if (game.didPlayerWin(game.getPlayer2())) {
-                    endGame(game.getPlayer2());
-                }
+            } else if (ship.didItSink() && game.didPlayerWin(game.getPlayer2())) {
+                endGame(game.getPlayer2());
             }
         }
         upDateLabels();
@@ -121,19 +121,28 @@ class GamePlayListener implements ActionListener {
         }
     }
 
-    private void endGame(Player player) {
-        if (player == game.getPlayer1()) {
+    private void endGame(Player won) {
+        if (won == game.getPlayer1()) {
             winner.setText("Player 1 won!");
+            showLocations(won, game.getPlayer2(), player2ButtonMap);
         } else {
             winner.setText("Player 2 won!");
+            showLocations(won, game.getPlayer1(), player1ButtonMap);
         }
-        for (int i = 0; i < player1ButtonMap.length; i++) {
-            for (int j = 0; j < player1ButtonMap.length; j++) {
+        newGame.setVisible(true);
+        quit.setVisible(true);
+    }
+
+    private void showLocations(Player won, Player lost, JButton[][] buttonMap) {
+        for (int i = 0; i < buttonMap.length; i++) {
+            for (int j = 0; j < buttonMap.length; j++) {
+                if (won.getLocations()[j][i] != null
+                        && lost.getEnemyMap()[j][i] == 0) {
+                    buttonMap[j][i].setBackground(Color.red);
+                }
                 player1ButtonMap[j][i].setEnabled(false);
                 player2ButtonMap[j][i].setEnabled(false);
             }
         }
-        newGame.setVisible(true);
-        quit.setVisible(true);
     }
 }

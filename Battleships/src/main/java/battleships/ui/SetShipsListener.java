@@ -12,25 +12,25 @@ import javax.swing.JLabel;
 
 public class SetShipsListener implements ActionListener {
 
-    private Battleships game;
-    private MainGUI main;
-    private Map<String, JButton> buttons;
-    private JButton[][] buttonMap;
-    private ShipBuilder sb;
+    private final ControlGUI main;
+    private final Map<String, JButton> buttons;
+    private final JButton[][] buttonMap;
+    private final ShipBuilder sb;
     private int size;
     private int direction;
     private JButton pressed;
-    private JLabel error;
+    private final JLabel error;
+    private int mode;
 
-    public SetShipsListener(MainGUI main, Battleships game, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error) {
+    public SetShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error) {
         this.main = main;
-        this.game = game;
         this.buttons = buttons;
         this.buttonMap = buttonMap;
         sb = new ShipBuilder();
         direction = 0;
         this.error = error;
         error.setForeground(Color.red);
+        this.mode = main.getGame().getMode();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SetShipsListener implements ActionListener {
         shipPlacement(e);
 
         if (e.getSource() == buttons.get("start")) {
-            main.switchTo("play");
+            main.switchTo(new GamePlayGUI(main));
         }
 
         for (int i = 0; i < buttonMap.length; i++) {
@@ -46,7 +46,7 @@ public class SetShipsListener implements ActionListener {
                 if (e.getSource() == buttonMap[j][i]) {
                     if (pressed != null) {
                         Ship ship = sb.buildShip(j, i, direction, size);
-                        if (game.newShip(ship)) {
+                        if (main.getGame().newShip(ship)) {
                             pressed.setEnabled(false);
                             size = 0;
                             pressed = null;

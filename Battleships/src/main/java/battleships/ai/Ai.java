@@ -67,12 +67,12 @@ public class Ai extends Player {
     @Override
     public void feedback(Boolean hit, Ship ship, int x, int y) {
         if (hit == true) {
-            super.getEnemyMap()[x][y] = 1;
+            getEnemyMap()[x][y] = 1;
             destroyedX.add(x);
             destroyedY.add(y);
             shipWasHit = true;
         } else {
-            super.getEnemyMap()[x][y] = -1;
+            getEnemyMap()[x][y] = -1;
         }
         if (ship != null) {
             negateSurroundingAreaAfterSinking(ship);
@@ -120,27 +120,20 @@ public class Ai extends Player {
     }
 
     private void addAcceptable(int x, int y) {
-        if (withinBoundaries(x, y) && super.getEnemyMap()[x][y] == 0) {
+        if (withinBoundaries(x, y) && getEnemyMap()[x][y] == 0) {
             acceptableX.add(x);
             acceptableY.add(y);
         }
     }
 
     private void acceptAllFreeCoordinates() {
-        for (int y = 0; y < super.getEnemyMap().length; y++) {
-            for (int x = 0; x < super.getEnemyMap().length; x++) {
-                if (super.getEnemyMap()[x][y] == 0) {
+        for (int y = 0; y < getEnemyMap().length; y++) {
+            for (int x = 0; x < getEnemyMap().length; x++) {
+                if (getEnemyMap()[x][y] == 0) {
                     acceptableX.add(x);
                     acceptableY.add(y);
                 }
             }
         }
-    }
-
-    private Boolean withinBoundaries(int x, int y) {
-        return y >= 0
-                && x >= 0
-                && y < super.getEnemyMap().length
-                && x < super.getEnemyMap().length;
     }
 }

@@ -116,10 +116,11 @@ public class BattleshipsTest {
     public void didPlayer2Win() {
         int x[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         int y[] = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
-        bs.newShip(new Ship(10, x, y));
-        for (int i = 0; i < 100; i++) {
+        Ship player1Ship = new Ship(10, x, y);
+        bs.newShip(player1Ship);
+        for (int i = 0; i < 201; i++) {
             Ship ship = bs.play(0, 0);
-            if (ship != null && ship.didItSink()) {
+            if (player1Ship.didItSink()) {
                 break;
             }
         }
@@ -127,21 +128,12 @@ public class BattleshipsTest {
     }
 
     @Test
-    public void noOneWinsWhenTheyShouldnt() {
+    public void noOneWinsBeforeTakingAnyTurns() {
         Battleships game = new Battleships(1, 1);
         int x[] = {0, 1, 2, 3, 4};
         int y[] = {5, 5, 5, 5, 5};
         game.newShip(new Ship(5, x, y));
         assertFalse(game.didPlayerWin(game.getPlayer1()));
-        Ship[][] locations = game.getPlayer2().getLocations();
-        for (int i = 0; i < locations.length; i++) {
-            for (int j = 0; j < locations.length; j++) {
-                if (locations[j][i] == null) {
-                    game.play(j, i);
-                    break;
-                }
-            }
-        }
         assertFalse(game.didPlayerWin(game.getPlayer2()));
     }
 }

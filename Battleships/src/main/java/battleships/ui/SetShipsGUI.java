@@ -7,27 +7,27 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 
-public class SetShipsGUI implements Runnable {
+public class SetShipsGUI extends GUI implements Runnable {
 
     private JFrame frame;
     private Battleships game;
-    private MainGUI main;
+    private ControlGUI main;
     private Map<String, JButton> buttons;
     private JButton[][] buttonMap;
+    private int mode;
 
-    public SetShipsGUI(MainGUI main, Battleships game) {
+    public SetShipsGUI(ControlGUI main) {
         this.main = main;
-        this.game = game;
+        this.game = main.getGame();
         this.buttons = new HashMap<>();
     }
 
     @Override
     public void run() {
         frame = new JFrame("Battleships");
-        frame.setPreferredSize(new Dimension(600, 450));
+        frame.setPreferredSize(new Dimension(1000, 500));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         start(frame.getContentPane());
     }
@@ -118,7 +118,7 @@ public class SetShipsGUI implements Runnable {
     }
 
     private void addActionListener(JButton start, JLabel error) {
-        SetShipsListener listener = new SetShipsListener(main, game, buttons, buttonMap, error);
+        SetShipsListener listener = new SetShipsListener(main, buttons, buttonMap, error);
         start.addActionListener(listener);
         for (JButton[] shipButtons : buttonMap) {
             for (JButton button : shipButtons) {

@@ -46,7 +46,7 @@ public abstract class Player {
      * @return Ship Object that was hit or null
      */
     public Ship shoot(int x, int y) {
-        if (locations[x][y] != null) {
+        if (withinBoundaries(x, y) && locations[x][y] != null) {
             locations[x][y].shoot();
             return locations[x][y];
         }
@@ -187,5 +187,21 @@ public abstract class Player {
                 }
             }
         }
+    }
+
+    /**
+     * Method makes sure coordinates correlate with the dimensions of the
+     * enemyMap array.
+     *
+     * @param x x coordinate to be checked
+     * @param y y coordinate to be checked
+     * @return True if coordinates correlate with the dimensions, otherwise
+     * false
+     */
+    public Boolean withinBoundaries(int x, int y) {
+        return y >= 0
+                && x >= 0
+                && y < enemyMap.length
+                && x < enemyMap.length;
     }
 }

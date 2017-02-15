@@ -12,6 +12,7 @@ public class Battleships {
     private Player inTurn;
     private Player opponent;
     private int fleetSize;
+    private int mode;
 
     /**
      * Method constructs an implementation of the class and initialises
@@ -23,13 +24,17 @@ public class Battleships {
      * fleet.
      */
     public Battleships(int mode, int fleetSize) {
+        this.mode = mode;
         this.fleetSize = fleetSize;
         if (mode == 1) {
-            player1 = new Person();
             player2 = new Ai(fleetSize);
-            inTurn = player1;
-            opponent = player2;
         }
+        if (mode == 2) {
+            player2 = new Person();
+        }
+        player1 = new Person();
+        inTurn = player1;
+        opponent = player2;
     }
 
     /**
@@ -58,6 +63,10 @@ public class Battleships {
     public Player getPlayerInTurn() {
         return inTurn;
     }
+    
+    public int getMode() {
+        return this.mode;
+    }
 
     /**
      * Method checks if the player given as parameter has won.
@@ -85,16 +94,17 @@ public class Battleships {
      * @return The Ship that was hit or null if no Ship was hit
      */
     public Ship play(int x, int y) {
-        Ship ship;
         if (inTurn instanceof Ai) {
             Ai ai = (Ai) inTurn;
             int[] c = ai.getShootingCoordinates();
             x = c[0];
             y = c[1];
+            if (x == -1 || y == -1) {
+                return null;
+            }
         }
-        ship = opponent.shoot(x, y);
+        Ship ship = opponent.shoot(x, y);
         giveFeedBack(ship, x, y);
-
         return ship;
     }
 

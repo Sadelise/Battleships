@@ -2,6 +2,7 @@ package battleships.ai;
 
 import battleships.logic.Player;
 import battleships.logic.Ship;
+import java.util.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -61,5 +62,27 @@ public class ShipBuilderTest {
         assertEquals(ship.getYcoordinates()[0], ship.getYcoordinates()[1]);
         assertEquals(ship2.getXcoordinates()[0], ship2.getXcoordinates()[1]);
 
+    }
+
+    @Test
+    public void createsTheRightShips() {
+        ai = new Ai(6);
+        ArrayList<Ship> ships = ai.getShips();
+        HashMap<Integer, Integer> expected = new HashMap<>();
+        expected.put(5, 1);
+        expected.put(4, 1);
+        expected.put(3, 2);
+        expected.put(2, 1);
+        expected.put(1, 1);
+        HashMap<Integer, Integer> found = new HashMap<>();
+        found.put(5, 0);
+        found.put(4, 0);
+        found.put(3, 0);
+        found.put(2, 0);
+        found.put(1, 0);
+        for (Ship ship : ships) {
+            found.put(ship.getSize(), found.get(ship.getSize()) + 1);
+        }
+        assertEquals(expected, found);
     }
 }
