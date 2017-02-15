@@ -63,7 +63,7 @@ public class Battleships {
      * Method checks if the player given as parameter has won.
      *
      * @param player The player whose situation is requested
-     * 
+     *
      * @return True if the opponent lost, otherwise false
      */
     public Boolean didPlayerWin(Player player) {
@@ -88,8 +88,9 @@ public class Battleships {
         Ship ship;
         if (inTurn instanceof Ai) {
             Ai ai = (Ai) inTurn;
-            x = ai.getShootingCoordinates()[0];
-            y = ai.getShootingCoordinates()[1];
+            int[] c = ai.getShootingCoordinates();
+            x = c[0];
+            y = c[1];
         }
         ship = opponent.shoot(x, y);
         giveFeedBack(ship, x, y);

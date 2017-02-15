@@ -57,7 +57,7 @@ public class ShipBuilder {
      *
      * @param cx The x coordinate of the Ships first piece
      * @param cy The y coordinate of the Ships first piece
-     * @param orientation The orientation of the Ship
+     * @param orientation The orientation of the Ship, 0 horizontal, 1 vertical
      * @param size The size of the Ship
      *
      * @return The created Ship

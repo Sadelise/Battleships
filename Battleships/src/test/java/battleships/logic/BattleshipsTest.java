@@ -143,6 +143,5 @@ public class BattleshipsTest {
             }
         }
         assertFalse(game.didPlayerWin(game.getPlayer2()));
-
     }
 }

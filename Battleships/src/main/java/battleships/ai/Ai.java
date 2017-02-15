@@ -77,7 +77,9 @@ public class Ai extends Player {
         if (ship != null) {
             negateSurroundingAreaAfterSinking(ship);
             shipWasHit = false;
-        }
+            destroyedX.clear();
+            destroyedY.clear();
+        };
     }
 
     private void acceptableCoordinates() {
@@ -86,21 +88,23 @@ public class Ai extends Player {
         } else {
             Collections.sort(destroyedX);
             Collections.sort(destroyedY);
-            acceptOnlySurroundings(destroyedX.size());
+            acceptOnlySurroundings();
         }
     }
 
-    private void acceptOnlySurroundings(int size) {
+    private void acceptOnlySurroundings() {
         int firstX = destroyedX.get(0);
         int lastX = destroyedX.get(destroyedX.size() - 1);
         int firstY = destroyedY.get(0);
         int lastY = destroyedY.get(destroyedY.size() - 1);
-        if (size == 1 || isHorizontal()) {
+        if (destroyedX.size() == 1 || isHorizontal()) {
             addAcceptable(firstX - 1, firstY);
             addAcceptable(lastX + 1, firstY);
-        } else if (size == 1 || !isHorizontal()) {
+        }
+        if (destroyedX.size() == 1 || !isHorizontal()) {
             addAcceptable(firstX, firstY - 1);
             addAcceptable(firstX, lastY + 1);
+
         }
     }
 
@@ -116,7 +120,7 @@ public class Ai extends Player {
     }
 
     private void addAcceptable(int x, int y) {
-        if (withinBoundaries(x, y)) {
+        if (withinBoundaries(x, y) && super.getEnemyMap()[x][y] == 0) {
             acceptableX.add(x);
             acceptableY.add(y);
         }

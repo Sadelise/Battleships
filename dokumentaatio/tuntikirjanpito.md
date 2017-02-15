@@ -16,3 +16,5 @@ Päivä | Tunnit | Kuvaus
 08.02.2017 | 4h | Käyttöliittymän ohjelmointia
 09.02.2017 | 2h | Hienosäätöä, JavaDoc
 10.02.2017 | 2h | Testejä, hienosäätöä, raporttien generoinnit
+13.02.2017 | 2h | Käyttöliittymän ohjelmointia, testien ja logiikan hienosäätöä
+14.02.2017 | 1h | JavaDocien korjailua, checkstyle konfigurointi, ShipBuilder fix, MigLayout Maven dependency fix
