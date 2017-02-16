@@ -10,26 +10,26 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class SetShipsListener implements ActionListener {
+public class PlaceShipsListener implements ActionListener {
 
     private final ControlGUI main;
     private final Map<String, JButton> buttons;
     private final JButton[][] buttonMap;
     private final ShipBuilder sb;
     private int size;
-    private int direction;
+    private int orientation;
     private JButton pressed;
     private final JLabel error;
     private final int mode;
     private JLabel playerLabel;
     private Battleships game;
 
-    public SetShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error, JLabel playerLabel) {
+    public PlaceShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error, JLabel playerLabel) {
         this.main = main;
         this.buttons = buttons;
         this.buttonMap = buttonMap;
         sb = new ShipBuilder();
-        direction = 0;
+        orientation = 0;
         this.error = error;
         error.setForeground(Color.red);
         this.mode = main.getGame().getMode();
@@ -56,7 +56,7 @@ public class SetShipsListener implements ActionListener {
             for (int j = 0; j < buttonMap.length; j++) {
                 if (e.getSource() == buttonMap[j][i]) {
                     if (pressed != null) {
-                        Ship ship = sb.buildShip(j, i, direction, size);
+                        Ship ship = sb.buildShip(j, i, orientation, size);
                         if (main.getGame().newShip(ship)) {
                             pressed.setEnabled(false);
                             size = 0;
@@ -66,8 +66,8 @@ public class SetShipsListener implements ActionListener {
                             }
                             error.setText(" ");
                         } else {
-                            error.setText("You may have tried to place your ship too close to another ship "
-                                    + "or inside the wall. Please try again.");
+                            error.setText("<html>You may have tried to place your ship too close to another ship <br>"
+                                    + "or inside the wall. Please try again.</html>");
                         }
                     } else {
                         error.setText("You must choose the ship you want to place before trying to place it.");
@@ -109,11 +109,11 @@ public class SetShipsListener implements ActionListener {
             buttons.get("boat1").setEnabled(false);
         }
         if (e.getSource() == buttons.get("toggleDirection")) {
-            if (direction == 0) {
-                direction = 1;
+            if (orientation == 0) {
+                orientation = 1;
                 buttons.get("toggleDirection").setText("vertical");
             } else {
-                direction = 0;
+                orientation = 0;
                 buttons.get("toggleDirection").setText("horizontal");
             }
         }

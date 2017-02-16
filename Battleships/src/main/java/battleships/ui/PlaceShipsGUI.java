@@ -9,7 +9,7 @@ import java.util.*;
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
-public class SetShipsGUI extends GUI implements Runnable {
+public class PlaceShipsGUI extends GUI implements Runnable {
     
     private JFrame frame;
     private Battleships game;
@@ -18,7 +18,7 @@ public class SetShipsGUI extends GUI implements Runnable {
     private JButton[][] buttonMap;
     private int mode;
     
-    public SetShipsGUI(ControlGUI main) {
+    public PlaceShipsGUI(ControlGUI main) {
         this.main = main;
         this.game = main.getGame();
         this.buttons = new HashMap<>();
@@ -45,10 +45,10 @@ public class SetShipsGUI extends GUI implements Runnable {
         panel.setBackground(Color.white);
         JLabel playerLabel = new JLabel("Player 1");
         JLabel instruction = new JLabel();
-        instruction.setText("<html><body><center><b>To set your ships:<br>"
+        instruction.setText("<html><body><center><b>To place your ships:<br>"
                 + "- click the ship you want to place<br>"
                 + "- click the spot where you want your ship to start from.<br> "
-                + "- change the direction your boat is facing<br>by pressing the toggle button.</center></html></body>");
+                + "- change the direction your boat is facing by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
         JLabel error = new JLabel(" ");
         
@@ -120,7 +120,7 @@ public class SetShipsGUI extends GUI implements Runnable {
     }
     
     private void addActionListener(JButton start, JLabel error, JLabel playerLabel) {
-        SetShipsListener listener = new SetShipsListener(main, buttons, buttonMap, error, playerLabel);
+        PlaceShipsListener listener = new PlaceShipsListener(main, buttons, buttonMap, error, playerLabel);
         start.addActionListener(listener);
         for (JButton[] shipButtons : buttonMap) {
             for (JButton button : shipButtons) {

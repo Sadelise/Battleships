@@ -32,7 +32,7 @@ public class MainMenuListener implements ActionListener {
     private void setupGame(int mode) {
         Battleships game = new Battleships(mode, 6);
         main.setGame(game);
-        main.switchTo(new SetShipsGUI(main));
+        main.switchTo(new PlaceShipsGUI(main));
     }
 
 }
