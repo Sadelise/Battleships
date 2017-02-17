@@ -10,3 +10,6 @@
     * onnistuu jos koordinaatit ovat alueen sisäpuolella
 
 ![luokkakaavio](http://yuml.me/48ffd75a)
+
+![sekvenssikaavio - laivan asettaminen]()
+![sekvenssikaavio - Pelaaja 1:sen vuoro, jota seuraa automaattinen tekoälyn vuoro]()
