@@ -11,5 +11,5 @@
 
 ![luokkakaavio](http://yuml.me/48ffd75a)
 
-![sekvenssikaavio - laivan asettaminen]()
-![sekvenssikaavio - Pelaaja 1:sen vuoro, jota seuraa automaattinen tekoälyn vuoro]()
+![sekvenssikaavio - laivan asettaminen](https://github.com/Sadelise/Battleships/blob/master/dokumentaatio/playerPlacingShip.png)
+![sekvenssikaavio - Pelaaja 1:sen vuoro, jota seuraa automaattinen tekoälyn vuoro](https://github.com/Sadelise/Battleships/blob/master/dokumentaatio/turnPlayed.png)
