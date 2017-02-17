@@ -1,7 +1,6 @@
 package battleships.logic;
 
 import battleships.ai.Ai;
-import battleships.ai.ShipBuilder;
 
 /**
  * Class contains the main functionality of the Battleships game.

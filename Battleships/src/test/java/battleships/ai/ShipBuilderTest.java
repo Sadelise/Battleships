@@ -1,5 +1,6 @@
 package battleships.ai;
 
+import battleships.logic.ShipBuilder;
 import battleships.logic.Player;
 import battleships.logic.Ship;
 import java.util.*;

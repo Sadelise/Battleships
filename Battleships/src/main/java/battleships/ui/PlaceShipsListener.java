@@ -1,6 +1,6 @@
 package battleships.ui;
 
-import battleships.ai.ShipBuilder;
+import battleships.logic.ShipBuilder;
 import battleships.logic.Battleships;
 import battleships.logic.Ship;
 import java.awt.Color;
