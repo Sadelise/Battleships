@@ -1,5 +1,6 @@
-package battleships.ai;
+package battleships.logic;
 
+import battleships.ai.Ai;
 import battleships.logic.ShipBuilder;
 import battleships.logic.Player;
 import battleships.logic.Ship;
