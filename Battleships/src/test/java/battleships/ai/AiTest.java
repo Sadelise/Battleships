@@ -1,5 +1,6 @@
 package battleships.ai;
 
+import battleships.logic.Battleships;
 import battleships.logic.Ship;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,7 +14,7 @@ public class AiTest {
     private Ai ai;
 
     public AiTest() {
-        ai = new Ai(6);
+        ai = new Ai();
     }
 
     @BeforeClass
@@ -33,8 +34,14 @@ public class AiTest {
     }
 
     @Test
-    public void HasShipsInTheBeginning() {
-        assertNotEquals(0, ai.getShips().size());
+    public void HasNoShipsInTheBeginning() {
+        assertEquals(0, ai.getShips().size());
+    }
+
+    @Test
+    public void AiHasShipsWhenGameConstructed() {
+        Battleships bs = new Battleships(1, 6);
+        assertNotEquals(0, bs.getPlayer2().getShips().size());
     }
 
     @Test

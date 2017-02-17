@@ -7,6 +7,6 @@
   * laivan asetus
     * onnistuu jos ruudussa ei ole jo laivaa tai toinen laiva ei ole liian lähellä
   * ampuminen
-    * onnistuu jos samaa ruutua ei ole jo ammuttu
+    * onnistuu jos koordinaatit ovat alueen sisäpuolella
 
-![luokkakaavio](http://yuml.me/efc23e57)
+![luokkakaavio](http://yuml.me/48ffd75a)

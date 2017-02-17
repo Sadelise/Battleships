@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class ShipBuilder {
 
-    private Random guesser;
+    private final Random guesser;
     private int[] x;
     private int[] y;
 

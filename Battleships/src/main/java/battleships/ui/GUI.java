@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package battleships.ui;
 
 import java.awt.Container;
@@ -11,10 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-/**
- *
- * @author sharhio
- */
 public abstract class GUI implements Runnable {
 
     private JFrame frame;

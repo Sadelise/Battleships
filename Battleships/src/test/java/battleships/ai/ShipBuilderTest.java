@@ -16,7 +16,7 @@ public class ShipBuilderTest {
     private Player ai;
 
     public ShipBuilderTest() {
-        ai = new Ai(6);
+        ai = new Ai();
         sb = new ShipBuilder();
     }
 
@@ -66,7 +66,8 @@ public class ShipBuilderTest {
 
     @Test
     public void createsTheRightShips() {
-        ai = new Ai(6);
+        ai = new Ai();
+        sb.buildAllShips(ai, 6, 5);
         ArrayList<Ship> ships = ai.getShips();
         HashMap<Integer, Integer> expected = new HashMap<>();
         expected.put(5, 1);

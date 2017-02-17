@@ -1,6 +1,7 @@
 package battleships.logic;
 
 import battleships.ai.Ai;
+import battleships.ai.ShipBuilder;
 
 /**
  * Class contains the main functionality of the Battleships game.
@@ -27,7 +28,9 @@ public class Battleships {
         this.mode = mode;
         this.fleetSize = fleetSize;
         if (mode == 1) {
-            player2 = new Ai(fleetSize);
+            player2 = new Ai();
+            ShipBuilder sb = new ShipBuilder();
+            sb.buildAllShips(player2, fleetSize, 5);
         }
         if (mode == 2) {
             player2 = new Person();

@@ -23,12 +23,9 @@ public class Ai extends Player {
      * Method constructs an implementation of the class and initialises
      * variables.
      *
-     * @param shipLimit The amount of ships the Ai will place on its map.
      */
-    public Ai(int shipLimit) {
+    public Ai() {
         guesser = new Random();
-        ShipBuilder sb = new ShipBuilder();
-        sb.buildAllShips(this, shipLimit, 5);
         shipWasHit = false;
         destroyedX = new ArrayList<>();
         destroyedY = new ArrayList<>();
