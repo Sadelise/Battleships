@@ -12,9 +12,9 @@ import net.miginfocom.swing.MigLayout;
 public class PlaceShipsGUI extends GUI implements Runnable {
     
     private JFrame frame;
-    private Battleships game;
-    private ControlGUI main;
-    private Map<String, JButton> buttons;
+    private final Battleships game;
+    private final ControlGUI main;
+    private final Map<String, JButton> buttons;
     private JButton[][] buttonMap;
     private int mode;
     
@@ -32,10 +32,7 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         start(frame.getContentPane());
     }
     
-    public JFrame getFrame() {
-        return frame;
-    }
-    
+    @Override
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
                 "fill",

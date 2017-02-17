@@ -13,11 +13,11 @@ import java.util.Random;
 public class Ai extends Player {
 
     private Boolean shipWasHit;
-    private List<Integer> destroyedX;
-    private List<Integer> destroyedY;
+    private final List<Integer> destroyedX;
+    private final List<Integer> destroyedY;
     private List<Integer> acceptableX;
     private List<Integer> acceptableY;
-    private Random guesser;
+    private final Random guesser;
 
     /**
      * Method constructs an implementation of the class and initialises
@@ -45,7 +45,7 @@ public class Ai extends Player {
         acceptableX = new ArrayList();
         acceptableY = new ArrayList();
         int[] coordinates = {-1, -1};
-        acceptableCoordinates();
+        findAcceptableCoordinates();
         if (acceptableX.size() > 0) {
             int randomIndex = guesser.nextInt(acceptableX.size());
             coordinates[0] = acceptableX.get(randomIndex);
@@ -82,7 +82,7 @@ public class Ai extends Player {
         }
     }
 
-    private void acceptableCoordinates() {
+    private void findAcceptableCoordinates() {
         if (!shipWasHit) {
             acceptAllFreeCoordinates();
         } else {

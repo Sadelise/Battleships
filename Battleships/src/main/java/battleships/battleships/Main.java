@@ -2,8 +2,6 @@ package battleships.battleships;
 
 import battleships.logic.Battleships;
 import battleships.ui.ControlGUI;
-import battleships.ui.GUI;
-import battleships.ui.PlaceShipsGUI;
 import javax.swing.SwingUtilities;
 
 public class Main {

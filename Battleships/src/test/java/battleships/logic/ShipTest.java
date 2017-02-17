@@ -15,23 +15,23 @@ public class ShipTest {
 
     @Test
     public void uppoaaKunKaikkiAmmuttu() {
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
         assertEquals(true, ship.didItSink());
     }
 
     @Test
     public void eiUppoaJosKaikkiaPalojaEiOleAmmuttu() {
-        ship.shoot();
+        ship.shot();
         assertEquals(false, ship.didItSink());
-        ship.shoot();
+        ship.shot();
         assertEquals(false, ship.didItSink());
-        ship.shoot();
+        ship.shot();
         assertEquals(false, ship.didItSink());
-        ship.shoot();
+        ship.shot();
         assertEquals(false, ship.didItSink());
     }
 
@@ -42,12 +42,12 @@ public class ShipTest {
 
     @Test
     public void uppoaakoKunAmmuttuLiikaa() {
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
-        ship.shoot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
+        ship.shot();
         assertEquals(true, ship.didItSink());
     }
 }

@@ -7,9 +7,9 @@ import java.util.*;
  */
 public abstract class Player {
 
-    private ArrayList<Ship> ships;
-    private Ship[][] locations;
-    private int[][] enemyMap;
+    private final ArrayList<Ship> ships;
+    private final Ship[][] locations;
+    private final int[][] enemyMap;
 
     /**
      * Method constructs an implementation of the class and initialises
@@ -38,7 +38,7 @@ public abstract class Player {
      * of player's fleet. If the locations contains a Ship the method will call
      * the shoot method of that particular Ship.
      *
-     * @see battleships.logic.Ship#shoot()
+     * @see battleships.logic.Ship#shot()
      *
      * @param x Contains the x coordinate the opponent guessed
      * @param y Contains the y coordinate the opponent guessed
@@ -47,7 +47,7 @@ public abstract class Player {
      */
     public Ship shoot(int x, int y) {
         if (withinBoundaries(x, y) && locations[x][y] != null) {
-            locations[x][y].shoot();
+            locations[x][y].shot();
             return locations[x][y];
         }
         return null;

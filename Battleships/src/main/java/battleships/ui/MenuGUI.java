@@ -1,17 +1,13 @@
 package battleships.ui;
 
 import battleships.logic.Battleships;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javax.swing.event.MenuListener;
 import net.miginfocom.swing.MigLayout;
 
 public class MenuGUI extends GUI implements Runnable {
@@ -31,10 +27,7 @@ public class MenuGUI extends GUI implements Runnable {
         start(frame.getContentPane());
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
-
+    @Override
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
                 "fill",

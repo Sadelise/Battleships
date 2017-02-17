@@ -6,9 +6,9 @@ package battleships.logic;
  */
 public class Ship {
 
-    private int[] x;
-    private int[] y;
-    private int size;
+    private final int[] x;
+    private final int[] y;
+    private final int size;
     private int hits;
 
     /**
@@ -29,7 +29,7 @@ public class Ship {
     /**
      * Method increases the hit counter by one.
      */
-    public void shoot() {
+    public void shot() {
         hits++;
     }
 

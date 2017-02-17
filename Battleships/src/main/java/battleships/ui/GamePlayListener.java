@@ -1,6 +1,5 @@
 package battleships.ui;
 
-import battleships.ai.Ai;
 import battleships.logic.Battleships;
 import battleships.logic.Person;
 import battleships.logic.Player;
@@ -23,6 +22,8 @@ class GamePlayListener implements ActionListener {
     private final JButton newGame;
     private final JButton quit;
     private final int mode;
+    private final Player player1;
+    private final Player player2;
 
     GamePlayListener(ControlGUI main, JButton[][] player1ButtonMap, JButton[][] player2ButtonMap, JLabel player1Label, JLabel player2Label, JLabel winner, JButton newGame, JButton quit) {
         this.main = main;
@@ -35,14 +36,17 @@ class GamePlayListener implements ActionListener {
         this.quit = quit;
         this.winner = winner;
         this.mode = main.getGame().getMode();
+        this.player1 = game.getPlayer1();
+        this.player2 = game.getPlayer2();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (game.getPlayer1() == game.getPlayerInTurn() && game.getPlayerInTurn() instanceof Person) {
-            checkPlayerBoard(game.getPlayer1(), player1ButtonMap, e);
-        } else if (game.getPlayer2() == game.getPlayerInTurn() && game.getPlayerInTurn() instanceof Person) {
-            checkPlayerBoard(game.getPlayer2(), player2ButtonMap, e);
+        Player inTurn = game.getPlayerInTurn();
+        if (player1 == inTurn && inTurn instanceof Person) {
+            findEvent(player1, player1ButtonMap, e);
+        } else if (player2 == inTurn && inTurn instanceof Person) {
+            findEvent(player2, player2ButtonMap, e);
         }
         if (e.getSource() == newGame) {
             main.switchTo(main.getMenu());
@@ -52,7 +56,7 @@ class GamePlayListener implements ActionListener {
         }
     }
 
-    private void checkPlayerBoard(Player player, JButton[][] buttonMap, ActionEvent e) {
+    private void findEvent(Player player, JButton[][] buttonMap, ActionEvent e) {
         for (int y = 0; y < buttonMap.length; y++) {
             for (int x = 0; x < buttonMap.length; x++) {
                 if (e.getSource() == buttonMap[x][y]) {
@@ -64,7 +68,7 @@ class GamePlayListener implements ActionListener {
 
     private void playMove(int x, int y, Player player, JButton[][] buttonMap) {
         Ship ship = game.play(x, y);
-        changeBoard(player.getEnemyMap(), buttonMap);
+        updateBoard(player.getEnemyMap(), buttonMap);
         if (ship == null) {
             upDateLabels();
             if (mode == 1) {
@@ -78,7 +82,7 @@ class GamePlayListener implements ActionListener {
     private void playAi() {
         while (true) {
             Ship ship = game.play(0, 0);
-            changeBoard(game.getPlayer2().getEnemyMap(), player2ButtonMap);
+            updateBoard(player2.getEnemyMap(), player2ButtonMap);
             if (ship == null) {
                 break;
             } else if (ship.didItSink() && game.didPlayerWin(game.getPlayer2())) {
@@ -88,7 +92,7 @@ class GamePlayListener implements ActionListener {
         upDateLabels();
     }
 
-    private void changeBoard(int[][] enemyMap, JButton[][] buttonMap) {
+    private void updateBoard(int[][] enemyMap, JButton[][] buttonMap) {
         int[][] map = enemyMap;
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map.length; x++) {

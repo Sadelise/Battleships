@@ -21,8 +21,8 @@ public class PlaceShipsListener implements ActionListener {
     private JButton pressed;
     private final JLabel error;
     private final int mode;
-    private JLabel playerLabel;
-    private Battleships game;
+    private final JLabel playerLabel;
+    private final Battleships game;
 
     public PlaceShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error, JLabel playerLabel) {
         this.main = main;

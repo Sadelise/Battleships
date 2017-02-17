@@ -7,12 +7,12 @@ import battleships.ai.Ai;
  */
 public class Battleships {
 
-    private Player player1;
+    private final Player player1;
     private Player player2;
     private Player inTurn;
     private Player opponent;
-    private int fleetSize;
-    private int mode;
+    private final int fleetSize;
+    private final int mode;
 
     /**
      * Method constructs an implementation of the class and initialises
