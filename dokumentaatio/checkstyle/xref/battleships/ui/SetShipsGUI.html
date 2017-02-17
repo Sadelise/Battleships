@@ -15,27 +15,27 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <strong class="jxr_keyword">import</strong> java.awt.Font;
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">import</strong> java.util.*;
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">import</strong> javax.swing.*;
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <strong class="jxr_keyword">import</strong> javax.swing.WindowConstants;
-<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <strong class="jxr_keyword">import</strong> net.miginfocom.swing.MigLayout;
-<a class="jxr_linenumber" name="L12" href="#L12">12</a>  
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../battleships/ui/SetShipsGUI.html">SetShipsGUI</a> <strong class="jxr_keyword">implements</strong> Runnable {
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>  
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>      <strong class="jxr_keyword">private</strong> JFrame frame;
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>      <strong class="jxr_keyword">private</strong> <a href="../../battleships/logic/Battleships.html">Battleships</a> game;
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>      <strong class="jxr_keyword">private</strong> <a href="../../battleships/ui/MainGUI.html">MainGUI</a> main;
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, JButton&gt; buttons;
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>      <strong class="jxr_keyword">private</strong> JButton[][] buttonMap;
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <strong class="jxr_keyword">import</strong> net.miginfocom.swing.MigLayout;
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../battleships/ui/SetShipsGUI.html">SetShipsGUI</a> <strong class="jxr_keyword">extends</strong> <a href="../../battleships/ui/GUI.html">GUI</a> <strong class="jxr_keyword">implements</strong> Runnable {
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">private</strong> JFrame frame;
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>      <strong class="jxr_keyword">private</strong> <a href="../../battleships/logic/Battleships.html">Battleships</a> game;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>      <strong class="jxr_keyword">private</strong> <a href="../../battleships/ui/ControlGUI.html">ControlGUI</a> main;
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, JButton&gt; buttons;
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>      <strong class="jxr_keyword">private</strong> JButton[][] buttonMap;
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> mode;
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>  
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>      <strong class="jxr_keyword">public</strong> <a href="../../battleships/ui/SetShipsGUI.html">SetShipsGUI</a>(<a href="../../battleships/ui/MainGUI.html">MainGUI</a> main, <a href="../../battleships/logic/Battleships.html">Battleships</a> game) {
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>      <strong class="jxr_keyword">public</strong> <a href="../../battleships/ui/SetShipsGUI.html">SetShipsGUI</a>(<a href="../../battleships/ui/ControlGUI.html">ControlGUI</a> main) {
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>          <strong class="jxr_keyword">this</strong>.main = main;
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>          <strong class="jxr_keyword">this</strong>.game = game;
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>          <strong class="jxr_keyword">this</strong>.game = main.getGame();
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>          <strong class="jxr_keyword">this</strong>.buttons = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>      }
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>      @Override
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> run() {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>          frame = <strong class="jxr_keyword">new</strong> JFrame(<span class="jxr_string">"Battleships"</span>);
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>          frame.setPreferredSize(<strong class="jxr_keyword">new</strong> Dimension(600, 450));
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>          frame.setPreferredSize(<strong class="jxr_keyword">new</strong> Dimension(1000, 500));
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>          frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>          start(frame.getContentPane());
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>      }
@@ -46,13 +46,13 @@
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">public</strong> JPanel start(Container container) {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>          JPanel panel = <strong class="jxr_keyword">new</strong> JPanel(<strong class="jxr_keyword">new</strong> MigLayout(
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>                  <span class="jxr_string">""</span>,
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>                  <span class="jxr_string">"[]20[]"</span>,
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>                  <span class="jxr_string">"[]20[]"</span>));
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>                  <span class="jxr_string">"fill"</span>,
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>                  <span class="jxr_string">"50[]20[]100"</span>,
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>                  <span class="jxr_string">""</span>));
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>          container.add(panel);
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>          panel.setBackground(Color.white);
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          JLabel instruction = <strong class="jxr_keyword">new</strong> JLabel();
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>          instruction.setText(<span class="jxr_string">"&lt;html&gt;&lt;body&gt;&lt;center&gt;&lt;b&gt;Welcome to Battleships!&lt;/b&gt;&lt;br&gt; To set your ships:&lt;br&gt;"</span>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>          instruction.setText(<span class="jxr_string">"&lt;html&gt;&lt;body&gt;&lt;center&gt;&lt;b&gt;To set your ships:&lt;br&gt;"</span>
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>                  + <span class="jxr_string">"- click the ship you want to place&lt;br&gt;"</span>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                  + <span class="jxr_string">"- click the spot where you want your ship to start from.&lt;br&gt; "</span>
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>                  + <span class="jxr_string">"- change the direction your boat is facing&lt;br&gt;by pressing the toggle button.&lt;/center&gt;&lt;/html&gt;&lt;/body&gt;"</span>);
@@ -63,10 +63,10 @@
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>          buttons.put(<span class="jxr_string">"start"</span>, start);
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          panel.add(instruction, <span class="jxr_string">"skip, wrap, center"</span>);
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>          panel.add(ships(), <span class="jxr_string">"height 600"</span>);
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>          panel.add(coordinates(), <span class="jxr_string">"wrap, height 600"</span>);
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>          panel.add(error, <span class="jxr_string">"wrap, span"</span>);
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>          panel.add(start, <span class="jxr_string">"skip, center"</span>);
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>          panel.add(ships(), <span class="jxr_string">""</span>);
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          panel.add(coordinates(), <span class="jxr_string">"wrap"</span>);
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>          panel.add(error, <span class="jxr_string">"skip, wrap"</span>);
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>          panel.add(start, <span class="jxr_string">"skip, center, wrap"</span>);
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          addActionListener(start, error);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          <strong class="jxr_keyword">return</strong> panel;
@@ -126,7 +126,7 @@
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>     }
 <a class="jxr_linenumber" name="L119" href="#L119">119</a> 
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addActionListener(JButton start, JLabel error) {
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>         <a href="../../battleships/ui/SetShipsListener.html">SetShipsListener</a> listener = <strong class="jxr_keyword">new</strong> <a href="../../battleships/ui/SetShipsListener.html">SetShipsListener</a>(main, game, buttons, buttonMap, error);
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>         <a href="../../battleships/ui/SetShipsListener.html">SetShipsListener</a> listener = <strong class="jxr_keyword">new</strong> <a href="../../battleships/ui/SetShipsListener.html">SetShipsListener</a>(main, buttons, buttonMap, error);
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>         start.addActionListener(listener);
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>         <strong class="jxr_keyword">for</strong> (JButton[] shipButtons : buttonMap) {
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>             <strong class="jxr_keyword">for</strong> (JButton button : shipButtons) {

@@ -39,7 +39,6 @@ public abstract class Player {
      * the shoot method of that particular Ship.
      *
      * @see battleships.logic.Ship#shot()
-     *
      * @param x Contains the x coordinate the opponent guessed
      * @param y Contains the y coordinate the opponent guessed
      *

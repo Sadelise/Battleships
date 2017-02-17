@@ -20,4 +20,4 @@ Päivä | Tunnit | Kuvaus
 14.02.2017 | 1h | JavaDocien korjailua, checkstyle konfigurointi, ShipBuilder fix, MigLayout Maven dependency fix
 15.02.2017 | 6h | Bugfixejä, GUI ohjelmointia
 16.02.2017 | 1h | Sekvenssikaavioita
-16.02.2017 | 1h | Luokkakaavion päivitys, pikkuasioiden korjailua
+16.02.2017 | 1h | Luokkakaavion päivitys, pikkuasioiden korjailua, raporttien generointi

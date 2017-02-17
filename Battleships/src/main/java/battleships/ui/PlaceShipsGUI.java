@@ -10,20 +10,20 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
 public class PlaceShipsGUI extends GUI implements Runnable {
-    
+
     private JFrame frame;
     private final Battleships game;
     private final ControlGUI main;
     private final Map<String, JButton> buttons;
     private JButton[][] buttonMap;
     private int mode;
-    
+
     public PlaceShipsGUI(ControlGUI main) {
         this.main = main;
         this.game = main.getGame();
         this.buttons = new HashMap<>();
     }
-    
+
     @Override
     public void run() {
         frame = new JFrame("Battleships");
@@ -31,7 +31,7 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         start(frame.getContentPane());
     }
-    
+
     @Override
     public JPanel start(Container container) {
         JPanel panel = new JPanel(new MigLayout(
@@ -48,25 +48,25 @@ public class PlaceShipsGUI extends GUI implements Runnable {
                 + "- change the direction your boat is facing by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
         JLabel error = new JLabel(" ");
-        
+
         JButton start = new JButton("Start");
         buttons.put("start", start);
-        
+
         panel.add(instruction, "skip, wrap, center");
         panel.add(playerLabel, "skip, wrap, center");
         panel.add(ships(), "");
         panel.add(coordinates(), "center, wrap");
         panel.add(error, "center, skip, wrap");
         panel.add(start, "skip, center, wrap");
-        
+
         addActionListener(start, error, playerLabel);
         return panel;
     }
-    
+
     public JPanel ships() {
         JPanel panel = new JPanel(new MigLayout());
         panel.setBackground(Color.white);
-        
+
         JButton boat5 = new JButton("*****");
         JButton boat4 = new JButton("****");
         JButton boat3a = new JButton("***");
@@ -91,7 +91,7 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         panel.add(toggleDirection, "wrap, center");
         return panel;
     }
-    
+
     public JPanel coordinates() {
         JPanel panel = new JPanel(new MigLayout(
                 "",
@@ -99,7 +99,7 @@ public class PlaceShipsGUI extends GUI implements Runnable {
                 "[]0[]"));
         panel.setBackground(Color.white);
         buttonMap = new JButton[10][10];
-        
+
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 JButton button = new JButton();
@@ -112,10 +112,10 @@ public class PlaceShipsGUI extends GUI implements Runnable {
                 }
             }
         }
-        
+
         return panel;
     }
-    
+
     private void addActionListener(JButton start, JLabel error, JLabel playerLabel) {
         PlaceShipsListener listener = new PlaceShipsListener(main, buttons, buttonMap, error, playerLabel);
         start.addActionListener(listener);
