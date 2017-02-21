@@ -127,10 +127,10 @@ class GamePlayListener implements ActionListener {
 
     private void endGame(Player won) {
         if (won == game.getPlayer1()) {
-            winner.setText("Player 1 won!");
+            winner.setText("Player 1 wins!");
             showLocations(won, game.getPlayer2(), player2ButtonMap);
         } else {
-            winner.setText("Player 2 won!");
+            winner.setText("Player 2 wins!");
             showLocations(won, game.getPlayer1(), player1ButtonMap);
         }
         newGame.setVisible(true);

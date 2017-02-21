@@ -34,7 +34,6 @@ public class ControlGUI implements Runnable {
         inUse = opening;
         frame.getContentPane().removeAll();
         opening.start(frame.getContentPane());
-
         frame.pack();
         frame.setVisible(true);
     }

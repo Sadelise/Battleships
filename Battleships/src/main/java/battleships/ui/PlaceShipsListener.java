@@ -81,32 +81,32 @@ public class PlaceShipsListener implements ActionListener {
         if (e.getSource() == buttons.get("boat5")) {
             size = 5;
             pressed = buttons.get("boat5");
-            buttons.get("boat5").setEnabled(false);
+//            buttons.get("boat5").setEnabled(false);
         }
         if (e.getSource() == buttons.get("boat4")) {
             size = 4;
             pressed = buttons.get("boat4");
-            buttons.get("boat4").setEnabled(false);
+//            buttons.get("boat4").setEnabled(false);
         }
         if (e.getSource() == buttons.get("boat3a")) {
             size = 3;
             pressed = buttons.get("boat3a");
-            buttons.get("boat3a").setEnabled(false);
+//            buttons.get("boat3a").setEnabled(false);
         }
         if (e.getSource() == buttons.get("boat3b")) {
             size = 3;
             pressed = buttons.get("boat3b");
-            buttons.get("boat3b").setEnabled(false);
+//            buttons.get("boat3b").setEnabled(false);
         }
         if (e.getSource() == buttons.get("boat2")) {
             size = 2;
             pressed = buttons.get("boat2");
-            buttons.get("boat2").setEnabled(false);
+//            buttons.get("boat2").setEnabled(false);
         }
         if (e.getSource() == buttons.get("boat1")) {
             size = 1;
             pressed = buttons.get("boat1");
-            buttons.get("boat1").setEnabled(false);
+//            buttons.get("boat1").setEnabled(false);
         }
         if (e.getSource() == buttons.get("toggleDirection")) {
             if (orientation == 0) {
