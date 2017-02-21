@@ -31,9 +31,6 @@ public class ControlGUI implements Runnable {
 
     public void switchTo(GUI opening) {
         opening.run();
-        if (inUse != null) {
-            inUse.getFrame().setVisible(false);
-        }
         inUse = opening;
         frame.getContentPane().removeAll();
         opening.start(frame.getContentPane());

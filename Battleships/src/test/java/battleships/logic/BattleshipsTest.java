@@ -32,9 +32,6 @@ public class BattleshipsTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
     public void playReturnsTheShipThatWasHit() {
         int x = bs.getPlayer2().getShips().get(0).getXcoordinates()[0];
@@ -112,21 +109,20 @@ public class BattleshipsTest {
         assertTrue(game.didPlayerWin(game.getPlayer1()));
     }
 
-    // TO BE FIXED
-//    @Test
-//    public void didPlayer2Win() {
-//        int x[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-//        int y[] = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
-//        Ship player1Ship = new Ship(10, x, y);
-//        bs.newShip(player1Ship);
-//        for (int i = 0; i < 201; i++) {
-//            Ship ship = bs.play(0, 0);
-//            if (player1Ship.didItSink()) {
-//                break;
-//            }
-//        }
-//        assertTrue(bs.didPlayerWin(bs.getPlayer2()));
-//    }
+    @Test
+    public void didPlayer2Win() {
+        int x[] = {0, 1, 2};
+        int y[] = {5, 5, 5};
+        bs.newShip(new Ship(2, x, y));
+        bs.getPlayer1().shoot(0, 5);
+        bs.getPlayer2().feedback(true, null, 0, 5);
+        bs.getPlayer1().shoot(1, 5);
+        bs.getPlayer2().feedback(true, null, 1, 5);
+        bs.play(0, 0);
+        bs.play(0, 0);
+        assertTrue(bs.didPlayerWin(bs.getPlayer2()));
+    }
+
     @Test
     public void noOneWinsBeforeTakingAnyTurns() {
         Battleships game = new Battleships(1, 1);

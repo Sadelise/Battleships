@@ -47,7 +47,7 @@ public class PlaceShipsGUI extends GUI implements Runnable {
                 + "- click the spot where you want your ship to start from.<br> "
                 + "- change the direction your boat is facing by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
-        JLabel error = new JLabel(" ");
+        JLabel error = new JLabel("<html><br></html>");
 
         JButton start = new JButton("Start");
         buttons.put("start", start);

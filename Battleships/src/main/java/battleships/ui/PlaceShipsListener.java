@@ -64,7 +64,7 @@ public class PlaceShipsListener implements ActionListener {
                             for (int k = 0; k < ship.getSize(); k++) {
                                 buttonMap[ship.getXcoordinates()[k]][ship.getYcoordinates()[k]].setEnabled(false);
                             }
-                            error.setText(" ");
+                            error.setText("<html><br></html>");
                         } else {
                             error.setText("<html>You may have tried to place your ship too close to another ship <br>"
                                     + "or inside the wall. Please try again.</html>");
