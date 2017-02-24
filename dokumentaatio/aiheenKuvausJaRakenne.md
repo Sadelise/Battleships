@@ -9,7 +9,7 @@
   * ampuminen
     * onnistuu jos koordinaatit ovat alueen sisäpuolella
 
-**Rakenne**
+**Rakenne**  
 Pelin logiikka rakentuu seitsemästä luokasta ja käyttöliittymä kahdeksasta. 
 * Battleships luokka pyörittää pelin toiminnallisuutta ja käyttöliittymä hakeekin tarvitsemansa tiedot siltä. 
 * Player-luokka on abstrakti ja sisältää kaikki toiminnallisuudet, jotka ovat yhteisiä molemmille pelaajatyypeille (tekoäly ja ihmispelaaja). Se pitää kirjaa pelaajan asettamista laivoista ja niiden sijainneista, sekä pelaajan ammuskelun tuloksista. 
