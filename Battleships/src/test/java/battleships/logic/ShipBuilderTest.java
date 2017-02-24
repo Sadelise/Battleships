@@ -2,8 +2,8 @@ package battleships.logic;
 
 import battleships.ai.Ai;
 import battleships.logic.ShipBuilder;
-import battleships.logic.Player;
-import battleships.logic.Ship;
+import battleships.domain.Player;
+import battleships.domain.Ship;
 import java.util.*;
 import org.junit.After;
 import org.junit.AfterClass;

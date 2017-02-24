@@ -1,7 +1,7 @@
 package battleships.logic;
 
-import battleships.logic.Player;
-import battleships.logic.Ship;
+import battleships.domain.Player;
+import battleships.domain.Ship;
 import java.util.Random;
 
 /**
@@ -77,5 +77,4 @@ public class ShipBuilder {
         }
         return new Ship(size, x, y);
     }
-
 }

@@ -42,31 +42,28 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         panel.setBackground(Color.white);
         JLabel playerLabel = new JLabel("Player 1");
         JLabel instruction = new JLabel();
-        instruction.setText("<html><body><center><b>To place your ships:<br>"
+        instruction.setText("<html><body><center><b>To place your ships:</b><br>"
                 + "- click the ship you want to place<br>"
                 + "- click the spot where you want your ship to start from.<br> "
                 + "- change the direction your boat is facing by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
         JLabel error = new JLabel("<html><br></html>");
-
         JButton start = new JButton("Start");
         buttons.put("start", start);
-
         panel.add(instruction, "skip, wrap, center");
         panel.add(playerLabel, "skip, wrap, center");
-        panel.add(ships(), "");
-        panel.add(coordinates(), "center, wrap");
-        panel.add(error, "center, skip, wrap");
+        panel.add(shipsPanel());
+        panel.add(coordinates(), "height 500, center, wrap");
+        panel.add(error, "height 200, width 500, center, skip, wrap");
         panel.add(start, "skip, center, wrap");
 
         addActionListener(start, error, playerLabel);
         return panel;
     }
 
-    public JPanel ships() {
+    public JPanel shipsPanel() {
         JPanel panel = new JPanel(new MigLayout());
         panel.setBackground(Color.white);
-
         JButton boat5 = new JButton("*****");
         JButton boat4 = new JButton("****");
         JButton boat3a = new JButton("***");
@@ -75,6 +72,10 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         JButton boat1 = new JButton("*");
         JButton toggleDirection = new JButton("horizontal");
         toggleDirection.setMinimumSize(new Dimension(120, 25));
+        JButton randomize = new JButton("randomize");
+        JButton reset = new JButton("reset");
+        buttons.put("randomize", randomize);
+        buttons.put("reset", reset);
         buttons.put("boat5", boat5);
         buttons.put("boat4", boat4);
         buttons.put("boat3a", boat3a);
@@ -89,6 +90,8 @@ public class PlaceShipsGUI extends GUI implements Runnable {
         panel.add(boat2, "wrap, center");
         panel.add(boat1, "wrap, center");
         panel.add(toggleDirection, "wrap, center");
+        panel.add(randomize, "wrap, center");
+        panel.add(reset, "wrap, center");
         return panel;
     }
 

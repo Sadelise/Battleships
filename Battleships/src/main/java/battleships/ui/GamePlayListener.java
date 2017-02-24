@@ -1,9 +1,9 @@
 package battleships.ui;
 
 import battleships.logic.Battleships;
-import battleships.logic.Person;
-import battleships.logic.Player;
-import battleships.logic.Ship;
+import battleships.domain.Person;
+import battleships.domain.Player;
+import battleships.domain.Ship;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,5 +1,7 @@
 package battleships.logic;
 
+import battleships.domain.Ship;
+import battleships.domain.Person;
 import battleships.ai.Ai;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -111,9 +113,7 @@ public class BattleshipsTest {
 
     @Test
     public void didPlayer2Win() {
-        int x[] = {0, 1, 2};
-        int y[] = {5, 5, 5};
-        bs.newShip(new Ship(2, x, y));
+        bs.newShip(0, 5, 0, 3, bs.getPlayer1());
         bs.getPlayer1().shoot(0, 5);
         bs.getPlayer2().feedback(true, null, 0, 5);
         bs.getPlayer1().shoot(1, 5);
@@ -126,9 +126,7 @@ public class BattleshipsTest {
     @Test
     public void noOneWinsBeforeTakingAnyTurns() {
         Battleships game = new Battleships(1, 1);
-        int x[] = {0, 1, 2, 3, 4};
-        int y[] = {5, 5, 5, 5, 5};
-        game.newShip(new Ship(5, x, y));
+        game.newShip(0, 5, 0, 5, game.getPlayer1());
         assertFalse(game.didPlayerWin(game.getPlayer1()));
         assertFalse(game.didPlayerWin(game.getPlayer2()));
     }
@@ -150,31 +148,24 @@ public class BattleshipsTest {
         Battleships game = new Battleships(1, 1);
         int x[] = {0, 1, 2, 3, 4};
         int y[] = {5, 5, 5, 5, 5};
-        assertTrue(game.newShip(new Ship(5, x, y)));
-        assertFalse(game.newShip(new Ship(5, x, y)));
+        assertTrue(game.newShip(0, 5, 0, 5, game.getPlayer1()));
+        assertFalse(game.newShip(0, 6, 0, 5, game.getPlayer1()));
+        assertFalse(game.newShip(0, 4, 0, 5, game.getPlayer1()));
+        assertFalse(game.newShip(5, 5, 0, 5, game.getPlayer1()));
     }
 
     @Test
     public void hasPlayerFinishedSettingShipsWorks() {
-        Battleships game = new Battleships(1, 1);
-        int x[] = {0, 1, 2, 3, 4};
-        int y[] = {5, 5, 5, 5, 5};
-        int q[] = {0, 1, 2, 3};
-        int w[] = {3, 3, 3, 3};
-        int e[] = {0, 1, 2};
-        int r[] = {1, 1, 1};
-        int t[] = {0, 1, 2};
-        int u[] = {7, 7, 7};
-        int i[] = {0, 1};
-        int o[] = {9, 9};
-        int a[] = {9};
-        int s[] = {0};
-        game.newShip(new Ship(5, x, y));
-        game.newShip(new Ship(4, q, w));
-        game.newShip(new Ship(3, e, r));
-        game.newShip(new Ship(3, t, u));
-        game.newShip(new Ship(2, i, o));
-        game.newShip(new Ship(1, a, s));
-        assertTrue(game.hasPlayerFinishedSettingShips(game.getPlayer1()));
+        Battleships game = new Battleships(1, 6);
+        assertFalse(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
+        game.newShip(0, 5, 0, 5, game.getPlayer1());
+        assertFalse(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
+        game.newShip(0, 3, 0, 4, game.getPlayer1());
+        game.newShip(0, 1, 0, 3, game.getPlayer1());
+        game.newShip(0, 7, 0, 3, game.getPlayer1());
+        game.newShip(0, 9, 0, 2, game.getPlayer1());
+        assertFalse(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
+        game.newShip(9, 0, 0, 1, game.getPlayer1());
+        assertTrue(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
     }
 }

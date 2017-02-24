@@ -1,5 +1,8 @@
 package battleships.logic;
 
+import battleships.domain.Ship;
+import battleships.domain.Player;
+import battleships.domain.Person;
 import battleships.ai.Ai;
 
 /**
@@ -13,6 +16,7 @@ public class Battleships {
     private Player opponent;
     private final int fleetSize;
     private final int mode;
+    private final ShipBuilder sb;
 
     /**
      * Method constructs an implementation of the class and initialises
@@ -24,11 +28,11 @@ public class Battleships {
      * fleet.
      */
     public Battleships(int mode, int fleetSize) {
+        this.sb = new ShipBuilder();
         this.mode = mode;
         this.fleetSize = fleetSize;
         if (mode == 1) {
             player2 = new Ai();
-            ShipBuilder sb = new ShipBuilder();
             sb.buildAllShips(player2, fleetSize, 5);
         }
         if (mode == 2) {
@@ -133,26 +137,40 @@ public class Battleships {
     }
 
     /**
-     * Method delivers a new Ship to player1 until player1's fleet is full, then
+     * Method creates a new Ship to player1 until player1's fleet is full, then
      * continues to deliver new Ships to player2 until their fleet is full.
      * Method will not add new ships to an AI player.
      *
-     * @param ship The ship in process of being delivered
+     * @param x the x coordinate indicating the starting point of the ship
+     * @param y the y coordinate indicating the starting point of the ship
+     * @param orientation The orientation of the Ship, 0 horizontal, 1 vertical
+     * @param size the size of the ship
+     * @param player the player that will receive the ship
      *
      * @return True if the Ship was successfully added to the fleet of a player,
      * otherwise false
      */
-    public Boolean newShip(Ship ship) {
-        Player player = inTurn;
-        if (inTurn.getShips().size() >= fleetSize) {
-            player = opponent;
-        }
-        if (!(player instanceof Ai)) {
+    public Boolean newShip(int x, int y, int orientation, int size, Player player) {
+        Ship ship = sb.buildShip(x, y, orientation, size);
+//        Player player = inTurn;
+//        if (inTurn.getShips().size() >= fleetSize) {
+//            player = opponent;
+//        }
+        if (!(player instanceof Ai) && player.getShips().size() < fleetSize) {
             if (player.addShip(ship)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Method creates a full fleet of ships to player sent as a parameter.
+     *
+     * @param player the player that will receive the fleet
+     */
+    public void newFleet(Player player) {
+        sb.buildAllShips(player, fleetSize, 5);
     }
 
     /**
@@ -162,7 +180,8 @@ public class Battleships {
      *
      * @return True if the player has a full fleet of ships, otherwise false
      */
-    public Boolean hasPlayerFinishedSettingShips(Player player) {
+    public Boolean hasPlayerFinishedPlacingShips(Player player) {
         return player.getShips().size() >= fleetSize;
     }
+
 }

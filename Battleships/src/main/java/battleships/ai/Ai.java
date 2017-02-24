@@ -1,7 +1,7 @@
 package battleships.ai;
 
-import battleships.logic.Player;
-import battleships.logic.Ship;
+import battleships.domain.Player;
+import battleships.domain.Ship;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -117,7 +117,7 @@ public class Ai extends Player {
     }
 
     private void addAcceptable(int x, int y) {
-        if (withinBoundaries(x, y) && getEnemyMap()[x][y] == 0) {
+        if (getPositionValidator().withinBoundaries(x, y, getEnemyMap().length) && getEnemyMap()[x][y] == 0) {
             acceptableX.add(x);
             acceptableY.add(y);
         }

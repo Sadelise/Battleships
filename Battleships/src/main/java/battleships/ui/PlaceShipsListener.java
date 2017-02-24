@@ -2,16 +2,20 @@ package battleships.ui;
 
 import battleships.logic.ShipBuilder;
 import battleships.logic.Battleships;
-import battleships.logic.Ship;
+import battleships.domain.Player;
+import battleships.domain.Ship;
+import com.sun.java.accessibility.util.EventID;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class PlaceShipsListener implements ActionListener {
-
+    
     private final ControlGUI main;
     private final Map<String, JButton> buttons;
     private final JButton[][] buttonMap;
@@ -23,7 +27,8 @@ public class PlaceShipsListener implements ActionListener {
     private final int mode;
     private final JLabel playerLabel;
     private final Battleships game;
-
+    private Player placingShips;
+    
     public PlaceShipsListener(ControlGUI main, Map<String, JButton> buttons, JButton[][] buttonMap, JLabel error, JLabel playerLabel) {
         this.main = main;
         this.buttons = buttons;
@@ -35,36 +40,55 @@ public class PlaceShipsListener implements ActionListener {
         this.mode = main.getGame().getMode();
         this.playerLabel = playerLabel;
         this.game = main.getGame();
+        this.placingShips = game.getPlayer1();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        chosenShip(e);
-
+        wasShipChosen(e);
+        checkGameArea(e);
+        
         if (e.getSource() == buttons.get("start")) {
-            if (game.getMode() == 1 || game.hasPlayerFinishedSettingShips(game.getPlayer2())) {
-                main.switchTo(new GamePlayGUI(main));
-            } else if (game.hasPlayerFinishedSettingShips(game.getPlayer1()) && (!playerLabel.getText().equals("Player 2"))) {
-                resetButtons();
-                playerLabel.setText("Player 2");
-            } else {
-                error.setText("You must set all the available ships.");
+            if (!game.hasPlayerFinishedPlacingShips(placingShips)) {
+                error.setText("You must place all the available ships.");
+            } else if (game.hasPlayerFinishedPlacingShips(placingShips)) {
+                if ((game.getMode() == 1 && placingShips == game.getPlayer1())
+                        || (game.getMode() == 2 && placingShips == game.getPlayer2())) {
+                    main.switchTo(new GamePlayGUI(main));
+                }
+                if (placingShips == game.getPlayer1()) {
+                    resetButtons();
+                    placingShips = game.getPlayer2();
+                    playerLabel.setText("Player 2");
+                }
             }
         }
-
+        
+        if (e.getSource() == buttons.get("reset")) {
+            resetButtons();
+            placingShips.resetShips();
+        }
+        if (e.getSource() == buttons.get("randomize")) {
+            error.setText(" ");
+            resetButtons();
+            placingShips.resetShips();
+            game.newFleet(placingShips);
+            showPlacements(placingShips);
+        }
+    }
+    
+    private void checkGameArea(ActionEvent e) {
         for (int i = 0; i < buttonMap.length; i++) {
             for (int j = 0; j < buttonMap.length; j++) {
                 if (e.getSource() == buttonMap[j][i]) {
                     if (pressed != null) {
-                        Ship ship = sb.buildShip(j, i, orientation, size);
-                        if (main.getGame().newShip(ship)) {
+                        if (main.getGame().newShip(j, i, orientation, size, placingShips)) {
                             pressed.setEnabled(false);
                             size = 0;
                             pressed = null;
-                            for (int k = 0; k < ship.getSize(); k++) {
-                                buttonMap[ship.getXcoordinates()[k]][ship.getYcoordinates()[k]].setEnabled(false);
-                            }
-                            error.setText("<html><br></html>");
+                            showPlacements(placingShips);
+                            error.setText("");
+                            
                         } else {
                             error.setText("<html>You may have tried to place your ship too close to another ship <br>"
                                     + "or inside the wall. Please try again.</html>");
@@ -76,8 +100,19 @@ public class PlaceShipsListener implements ActionListener {
             }
         }
     }
-
-    private void chosenShip(ActionEvent e) {
+    
+    private void showPlacements(Player player) {
+        for (int i = 0; i < player.getLocations().length; i++) {
+            for (int j = 0; j < player.getLocations().length; j++) {
+                if (player.getLocations()[j][i] != null) {
+                    buttonMap[j][i].setEnabled(false);
+                    buttonMap[j][i].setBackground(Color.black);
+                }
+            }
+        }
+    }
+    
+    private void wasShipChosen(ActionEvent e) {
         if (e.getSource() == buttons.get("boat5")) {
             size = 5;
             pressed = buttons.get("boat5");
@@ -118,11 +153,12 @@ public class PlaceShipsListener implements ActionListener {
             }
         }
     }
-
+    
     private void resetButtons() {
         for (JButton[] cbuttons : buttonMap) {
             for (JButton b : cbuttons) {
                 b.setEnabled(true);
+                b.setBackground(new JButton().getBackground());
             }
         }
         for (JButton button : buttons.values()) {

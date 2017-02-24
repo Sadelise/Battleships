@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 15,
+      <title>File: 16,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Person.java">battleships/logic/Person.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.domain.Player.java">battleships/domain/Player.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.ai.ShipBuilder.java">battleships/ai/ShipBuilder.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.ShipValidator.java">battleships/logic/ShipValidator.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Player.java">battleships/logic/Player.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.domain.Person.java">battleships/domain/Person.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#battleships.logic.Ship.java">battleships/logic/Ship.java</a>
+                  <a href="${project.url}/checkstyle.html#battleships.logic.ShipBuilder.java">battleships/logic/ShipBuilder.java</a>
                 </td>
                 <td>
                   0
@@ -173,6 +173,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#battleships.ui.GUI.java">battleships/ui/GUI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#battleships.domain.Ship.java">battleships/domain/Ship.java</a>
                 </td>
                 <td>
                   0

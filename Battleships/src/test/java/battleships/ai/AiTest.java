@@ -1,7 +1,7 @@
 package battleships.ai;
 
 import battleships.logic.Battleships;
-import battleships.logic.Ship;
+import battleships.domain.Ship;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
