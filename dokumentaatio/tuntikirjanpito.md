@@ -21,3 +21,5 @@ Päivä | Tunnit | Kuvaus
 15.02.2017 | 6h | Bugfixejä, GUI ohjelmointia
 16.02.2017 | 1h | Sekvenssikaavioita
 16.02.2017 | 1h | Luokkakaavion päivitys, pikkuasioiden korjailua, raporttien generointi
+23.02.2017 | 2h | Uusia toimintoja. Bugin korjailua. Käyttöohjeet, rakennekuvaus.
+24.02.2017 | 3h | Bugin korjailua, luokkien järjestyä. Dokumentaation päivitys.
