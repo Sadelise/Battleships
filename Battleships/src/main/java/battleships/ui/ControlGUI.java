@@ -21,7 +21,6 @@ public class ControlGUI implements Runnable {
         frame = new JFrame("Battleships");
         frame.setPreferredSize(new Dimension(800, 550));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         switchTo(menu);
     }
 
