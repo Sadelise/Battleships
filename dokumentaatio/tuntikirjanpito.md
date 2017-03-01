@@ -24,5 +24,5 @@ Päivä | Tunnit | Kuvaus
 23.02.2017 | 2h | Uusia toimintoja. Bugin korjailua. Käyttöohjeet, rakennekuvaus.
 24.02.2017 | 3h | Bugin korjailua, luokkien järjestyä. Dokumentaation päivitys.
 28.02.2017 | 2h | Uusia testejä
-01.03.2017 | 2h | Javadoc päivitys, luokkien siivous, raporttien generoinnit
+01.03.2017 | 2h | Javadoc päivitys, luokkien siivous, raporttien generoinnit, dokumentaation päivitys
 
