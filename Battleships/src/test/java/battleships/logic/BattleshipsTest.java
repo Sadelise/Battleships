@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class BattleshipsTest {
 
-    private Battleships bs;
+    private final Battleships bs;
 
     public BattleshipsTest() {
         bs = new Battleships(1, 6);
@@ -57,7 +57,7 @@ public class BattleshipsTest {
             }
         }
         assertArrayEquals(emptyMapBeforeAnyTurns, bs.getPlayer2().getEnemyMap());
-
+        assertEquals(bs.getPlayer1(), bs.getPlayerInTurn());
         int player1ShootingResult;
         for (int i = 0; i < 10; i++) {
             bs.play(0, i);
@@ -66,6 +66,7 @@ public class BattleshipsTest {
                 break;
             }
         }
+        assertEquals(bs.getPlayer2(), bs.getPlayerInTurn());
         bs.play(0, 0);
         int[][] mapAfterPlayer2Turn = bs.getPlayer2().getEnemyMap();
 
@@ -113,13 +114,18 @@ public class BattleshipsTest {
 
     @Test
     public void didPlayer2Win() {
-        bs.newShip(0, 5, 0, 3, bs.getPlayer1());
-        bs.getPlayer1().shoot(0, 5);
-        bs.getPlayer2().feedback(true, null, 0, 5);
-        bs.getPlayer1().shoot(1, 5);
-        bs.getPlayer2().feedback(true, null, 1, 5);
-        bs.play(0, 0);
-        bs.play(0, 0);
+        Battleships game = new Battleships(1, 1);
+        game.getPlayer2().getShips().clear();
+        Ship[][] ships = game.getPlayer2().getLocations();
+        for (int i = 0; i < ships.length; i++) {
+            for (int j = 0; j < ships.length; j++) {
+                ships[j][i] = null;
+            }
+        }
+        game.newShip(0, 0, 0, 1, game.getPlayer2());
+        game.newShip(0, 0, 0, 1, game.getPlayer1());
+        game.play(5, 5);
+        game.play(0, 0);
         assertTrue(bs.didPlayerWin(bs.getPlayer2()));
     }
 
@@ -167,5 +173,47 @@ public class BattleshipsTest {
         assertFalse(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
         game.newShip(9, 0, 0, 1, game.getPlayer1());
         assertTrue(game.hasPlayerFinishedPlacingShips(game.getPlayer1()));
+    }
+
+    @Test
+    public void playReturnsNullWhenAiCantShootAnything() {
+        int[][] map = bs.getPlayer2().getEnemyMap();
+        Ship[][] ships = bs.getPlayer2().getLocations();
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map.length; j++) {
+                map[j][i] = 1;
+                ships[j][i] = null;
+            }
+        }
+        bs.play(0, 0);
+        Ship ship = bs.play(0, 0);
+        assertEquals(ship, null);
+
+    }
+
+    @Test
+    public void newShipFleetsizeCheckerWorks() {
+        Battleships game = new Battleships(1, 2);
+        assertTrue(game.newShip(1, 2, 0, 1, game.getPlayer1()));
+        assertTrue(game.newShip(3, 2, 0, 1, game.getPlayer1()));
+        assertFalse(game.newShip(5, 2, 0, 1, game.getPlayer1()));
+    }
+
+    @Test
+    public void newFleetWorks() {
+        Battleships game = new Battleships(1, 2);
+        game.newFleet(game.getPlayer1());
+        assertEquals(2, game.getPlayer1().getShips().size());
+    }
+
+    @Test
+    public void playerGetsCorrectFeedBackAfterSinkingAShip() {
+        int[] x = bs.getPlayer2().getShips().get(1).getXcoordinates();
+        int[] y = bs.getPlayer2().getShips().get(1).getYcoordinates();
+        for (int i = 0; i < x.length; i++) {
+            bs.play(x[i], y[i]);
+            int[][] map = bs.getPlayer1().getEnemyMap();
+            assertTrue(map[x[i]][y[i]] == 1);
+        }
     }
 }

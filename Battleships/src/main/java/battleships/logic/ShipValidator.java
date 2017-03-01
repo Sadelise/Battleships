@@ -32,7 +32,7 @@ public class ShipValidator {
     private Boolean isSingleCoordinateAcceptable(int x, int y, Ship[][] locations) {
         for (int i = y - 1; i <= y + 1; i++) {
             for (int j = x - 1; j <= x + 1; j++) {
-                if (i >= 0 && i < locations.length && j >= 0 && j < locations.length) {
+                if (withinBoundaries(j, i, locations.length)) {
                     if (locations[j][i] != null || !(withinBoundaries(x, y, locations.length))) {
                         return false;
                     }

@@ -88,4 +88,24 @@ public class ShipBuilderTest {
         }
         assertEquals(expected, found);
     }
+
+    @Test
+    public void createsShipToRightDirection() {
+        Ship ship = sb.buildShip(5, 0, 0, 2);
+        int[] x = ship.getXcoordinates();
+        int[] y = ship.getYcoordinates();
+        assertTrue(x[0] == 5
+                && x[1] == 6
+                && y[0] == 0
+                && y[1] == 0
+        );
+        Ship ship1 = sb.buildShip(5, 5, 1, 2);
+        int[] x1 = ship1.getXcoordinates();
+        int[] y1 = ship1.getYcoordinates();
+        assertTrue(x1[0] == 5
+                && x1[1] == 5
+                && y1[0] == 5
+                && y1[1] == 6
+        );
+    }
 }

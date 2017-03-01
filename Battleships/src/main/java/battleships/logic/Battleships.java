@@ -152,10 +152,6 @@ public class Battleships {
      */
     public Boolean newShip(int x, int y, int orientation, int size, Player player) {
         Ship ship = sb.buildShip(x, y, orientation, size);
-//        Player player = inTurn;
-//        if (inTurn.getShips().size() >= fleetSize) {
-//            player = opponent;
-//        }
         if (!(player instanceof Ai) && player.getShips().size() < fleetSize) {
             if (player.addShip(ship)) {
                 return true;
