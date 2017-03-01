@@ -13,7 +13,7 @@
 Pelin logiikka rakentuu seitsemästä luokasta ja käyttöliittymä kahdeksasta. 
 * Battleships luokka pyörittää pelin toiminnallisuutta ja käyttöliittymä hakeekin tarvitsemansa tiedot siltä. 
 * Player-luokka on abstrakti ja sisältää kaikki toiminnallisuudet, jotka ovat yhteisiä molemmille pelaajatyypeille (tekoäly ja ihmispelaaja). Se pitää kirjaa pelaajan asettamista laivoista ja niiden sijainneista, sekä pelaajan ammuskelun tuloksista. 
-* ShipValidator-luokka sisältää metodit sen varmistamiseen, että Player-luokan vastaanottamat laivat ovat sääntöjen mukaisia ja sääntöjen mukaisesti sijoittumassa pelaajan pelialueelle. 
+* ShipValidator-luokka sisältää metodit sen varmistamiseen, että Player-luokan vastaanottamat laivat ovat sääntöjen mukaisia ja sääntöjen mukaisesti sijoittumassa pelaajan pelialueelle. Lisäksi voidaan varmistaa, että arvaus on laillinen eli pelialueen sisäpuolella.
 * Person-luokka perii Player-luokan ja toteuttaa ainoastaan Player luokan abstraktin palaute-metodin, joka eroaa hieman tekoälyn vastaavasta metodista.
 * Ai perii myös Player luokan, mutta palaute-metodin lisäksi luokka hakee järkevät ampumisen kohteet ja arpoo niistä jonkun ammuttavaksi (eli palautettavaksi Battleships luokalle). 
 * Ship-luokka pitää sisällään yksittäisen laivan koordinaatit, koon, sekä osumat. 
