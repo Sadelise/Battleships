@@ -11,8 +11,8 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> battleships.domain.Ship;
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * Class contains methods for ensuring a player's ships are correctly shaped and</em>
-<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * laid out according to rules.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * Class contains methods for ensuring that player's ships are correctly shaped</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> * and laid out according to rules.</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../battleships/logic/ShipValidator.html">ShipValidator</a> {
 <a class="jxr_linenumber" name="L10" href="#L10">10</a>  
@@ -40,7 +40,7 @@
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">private</strong> Boolean isSingleCoordinateAcceptable(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <a href="../../battleships/domain/Ship.html">Ship</a>[][] locations) {
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = y - 1; i &lt;= y + 1; i++) {
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> j = x - 1; j &lt;= x + 1; j++) {
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>                  <strong class="jxr_keyword">if</strong> (i &gt;= 0 &amp;&amp; i &lt; locations.length &amp;&amp; j &gt;= 0 &amp;&amp; j &lt; locations.length) {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>                  <strong class="jxr_keyword">if</strong> (withinBoundaries(j, i, locations.length)) {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>                      <strong class="jxr_keyword">if</strong> (locations[j][i] != <strong class="jxr_keyword">null</strong> || !(withinBoundaries(x, y, locations.length))) {
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>                          <strong class="jxr_keyword">return</strong> false;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>                      }
@@ -52,39 +52,39 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> Boolean shipPiecesAttached(<strong class="jxr_keyword">int</strong>[] x, <strong class="jxr_keyword">int</strong>[] y) {
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">if</strong> (x.length &gt; 1) {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">int</strong> changes[];
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">int</strong> stays[];
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>              <strong class="jxr_keyword">int</strong> staysAt;
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>              <strong class="jxr_keyword">if</strong> (y[0] == y[1]) {
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>                  staysAt = y[0];
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>                  stays = y;
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>                  changes = x;
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>              } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  staysAt = x[0];
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>                  stays = x;
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>                  changes = y;
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>              }
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>              <strong class="jxr_keyword">int</strong> prev = changes[0];
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 1; i &lt; x.length; i++) {
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>                  <strong class="jxr_keyword">if</strong> ((prev + 1 != changes[i] || stays[i] != staysAt)) {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>                      <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  }
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  prev = changes[i];
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>              }
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>          }
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>  
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * Method makes sure coordinates are within the dimensions of the game area.</em>
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     *</em>
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     * @param x x coordinate to be checked</em>
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">     * @param y y coordinate to be checked</em>
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment">     * @param length the length of the game area</em>
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>  <em class="jxr_javadoccomment">     * @return True if coordinates within limits, otherwise false</em>
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">public</strong> Boolean withinBoundaries(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <strong class="jxr_keyword">int</strong> length) {
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">return</strong> y &gt;= 0 &amp;&amp; x &gt;= 0 &amp;&amp; y &lt; length &amp;&amp; x &lt; length;
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>              <strong class="jxr_keyword">int</strong> changes[], stays[], staysAt;
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>              <strong class="jxr_keyword">if</strong> (y[0] == y[1]) {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>                  staysAt = y[0];
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>                  stays = y;
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>                  changes = x;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>              } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>                  staysAt = x[0];
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>                  stays = x;
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  changes = y;
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>              }
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 1; i &lt; x.length; i++) {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>                  <strong class="jxr_keyword">if</strong> ((changes[i - 1] + 1 != changes[i] || stays[i] != staysAt)) {
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>                      <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  }
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>              }
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          }
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>      }
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     * Method makes sure given coordinates are within the dimensions of the game</em>
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">     * area.</em>
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">     * @param x x coordinate to be checked</em>
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * @param y y coordinate to be checked</em>
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     * @param length the length of the game area</em>
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_javadoccomment">     * @return True if coordinates within limits, otherwise false</em>
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> Boolean withinBoundaries(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <strong class="jxr_keyword">int</strong> length) {
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">return</strong> y &gt;= 0
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>                  &amp;&amp; x &gt;= 0
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>                  &amp;&amp; y &lt; length
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>                  &amp;&amp; x &lt; length;
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      }
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  }
 </pre>

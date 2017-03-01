@@ -28,9 +28,9 @@
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Random guesser;
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>  
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <em class="jxr_javadoccomment">     * Method constructs an implementation of the class and initialises</em>
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">     * variables.</em>
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <em class="jxr_javadoccomment">     * Initialises random-generator and lists which will hold information about</em>
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">     * hits. Variable containing the information whether or not a ship was hit</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment">     * on last turn will be initially set as false.</em>
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>      <strong class="jxr_keyword">public</strong> <a href="../../battleships/ai/Ai.html">Ai</a>() {
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>          guesser = <strong class="jxr_keyword">new</strong> Random();
@@ -125,7 +125,7 @@
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>     }
 <a class="jxr_linenumber" name="L118" href="#L118">118</a> 
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addAcceptable(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y) {
-<a class="jxr_linenumber" name="L120" href="#L120">120</a>         <strong class="jxr_keyword">if</strong> (getPositionValidator().withinBoundaries(x, y, getEnemyMap().length) &amp;&amp; getEnemyMap()[x][y] == 0) {
+<a class="jxr_linenumber" name="L120" href="#L120">120</a>         <strong class="jxr_keyword">if</strong> (getShipValidator().withinBoundaries(x, y, getEnemyMap().length) &amp;&amp; getEnemyMap()[x][y] == 0) {
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>             acceptableX.add(x);
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>             acceptableY.add(y);
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>         }

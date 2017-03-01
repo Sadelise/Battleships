@@ -110,8 +110,9 @@ public abstract class Player {
     }
 
     /**
-     * Method adds the parameter Ship to the list of Ships and adds its location
-     * information to the map after making sure the Ship is valid.
+     * Method adds the parameter Ship to the Player's list of Ships. Also adds
+     * the Ship's location information to the Player's map after making sure the
+     * Ship is valid.
      *
      * @param ship The ship intended to be added to the players fleet
      *

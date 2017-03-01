@@ -22,8 +22,8 @@
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong>[] y;
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">     * Method constructs an implementation of the class and initialises</em>
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">     * variables.</em>
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">     * Initialises the class variable guesser with a newly created instance of</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">     * Random.</em>
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>      <strong class="jxr_keyword">public</strong> <a href="../../battleships/logic/ShipBuilder.html">ShipBuilder</a>() {
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>          <strong class="jxr_keyword">this</strong>.guesser = <strong class="jxr_keyword">new</strong> Random();
@@ -78,14 +78,13 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>              y[i] = cy;
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>              <strong class="jxr_keyword">if</strong> (orientation == 0) {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>                  cx++;
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>              }
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>              <strong class="jxr_keyword">if</strong> (orientation == 1) {
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>                  cy++;
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>              }
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>          }
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../battleships/domain/Ship.html">Ship</a>(size, x, y);
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>      }
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>  }
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>              } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (orientation == 1) {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>                  cy++;
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              }
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          }
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../battleships/domain/Ship.html">Ship</a>(size, x, y);
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017. All rights reserved.</div>
