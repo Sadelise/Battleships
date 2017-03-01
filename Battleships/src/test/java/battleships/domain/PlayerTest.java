@@ -1,20 +1,13 @@
 package battleships.domain;
 
-import battleships.domain.Ship;
-import battleships.domain.Player;
-import battleships.domain.Person;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
-    
-    private Player player;
-    private Ship ship;
-    
+
+    private final Player player;
+    private final Ship ship;
+
     public PlayerTest() {
         player = new Person();
         int[] x = {4, 5, 6, 7, 8};
@@ -25,72 +18,56 @@ public class PlayerTest {
         int[] h = {6};
         player.addShip(new Ship(1, k, h));
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    
+
     @Test
     public void addingNewShipWorks() {
         int[] x = {8, 8, 8, 8};
         int[] y = {6, 7, 8, 9};
         assertEquals(true, player.addShip(new Ship(4, x, y)));
-        
+
     }
-    
+
     @Test
     public void cannotPlaceEmptyShip() {
         int[] x = {};
         int[] y = {};
         assertEquals(false, player.addShip(new Ship(0, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceEmptyShipEvenIfSizeNot0() {
         int[] x = {};
         int[] y = {};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
-        
+
     }
-    
+
     @Test
     public void cannotPlaceShipWhenMissingPieces() {
         int[] x = {2};
         int[] y = {8};
         assertEquals(false, player.addShip(new Ship(2, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipWithExtraPieces() {
         int[] x = {7, 8, 9};
         int[] y = {9, 9, 9};
         assertEquals(false, player.addShip(new Ship(2, x, y)));
-        
+
     }
-    
+
     @Test
     public void notHittingReallyDoesntHit() {
         assertEquals(null, player.shoot(4, 2));
         assertEquals(null, player.shoot(3, 3));
     }
-    
+
     @Test
     public void shootingHitsWhenSupposedTo() {
         assertEquals(ship, player.shoot(4, 3));
     }
-    
+
     @Test
     public void shipCanSink() {
         player.shoot(4, 3);
@@ -100,7 +77,7 @@ public class PlayerTest {
         player.shoot(8, 3);
         assertEquals(true, ship.didItSink());
     }
-    
+
     @Test
     public void playerLosesAfterAllShipsSunk() {
         player.shoot(4, 3);
@@ -112,7 +89,7 @@ public class PlayerTest {
         player.shoot(6, 6);
         assertEquals(true, player.didPlayerLose());
     }
-    
+
     @Test
     public void canAddNewShipInCorner() {
         int[] i = {9};
@@ -128,63 +105,63 @@ public class PlayerTest {
         int[] j4 = {0};
         assertEquals(true, player.addShip(new Ship(1, i4, j4)));
     }
-    
+
     @Test
     public void cannotPlaceShipRigthAboveAnother() {
         int[] x = {6};
         int[] y = {7};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipRightBelowAnother() {
         int[] x = {6};
         int[] y = {5};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipRightToTheRigthOfAnother() {
         int[] x = {7};
         int[] y = {6};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipRightToTheLeftOfAnother() {
         int[] x = {5};
         int[] y = {6};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipTopRightFromAnother() {
         int[] x = {7};
         int[] y = {7};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipTopLeftFromAnother() {
         int[] x = {5};
         int[] y = {7};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipBottomRightFromAnother() {
         int[] x = {7};
         int[] y = {5};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipBottomLeftFromAnother() {
         int[] x = {5};
         int[] y = {5};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void placingShipIntoLastAvailableSquare() {
         for (int i = 0; i < 10; i++) {
@@ -200,7 +177,7 @@ public class PlayerTest {
         int x[] = {2};
         assertEquals(true, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipIfArrayFull() {
         for (int i = 0; i < 10; i++) {
@@ -214,7 +191,7 @@ public class PlayerTest {
         int x[] = {2};
         assertEquals(false, player.addShip(new Ship(1, x, y)));
     }
-    
+
     @Test
     public void cannotPlaceShipInTheMiddleOfOthers() {
         int[] x = {6};
@@ -230,7 +207,7 @@ public class PlayerTest {
         int[] m = {7};
         assertEquals(false, player.addShip(new Ship(1, n, m)));
     }
-    
+
     @Test
     public void enemyMapsEmptyInTheBeginning() {
         int[][] map = new int[10][10];
@@ -241,7 +218,7 @@ public class PlayerTest {
         }
         assertArrayEquals(map, player.getEnemyMap());
     }
-    
+
     @Test
     public void theEnemyMapIsUpdatedCorrectly() {
         int[] x = {0};
@@ -255,9 +232,9 @@ public class PlayerTest {
         assertEquals(1, player.getEnemyMap()[2][2]);
         player.feedback(false, null, 3, 3);
         assertEquals(-1, player.getEnemyMap()[3][3]);
-        
+
     }
-    
+
     @Test
     public void locationsIsUpdatedCorrectly() {
         int[] x = {1, 2};
@@ -273,7 +250,7 @@ public class PlayerTest {
                 && ships[3][8] == null
         );
     }
-    
+
     @Test
     public void resetShipsWorks() {
         player.resetShips();

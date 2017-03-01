@@ -14,8 +14,8 @@ public class ShipBuilder {
     private int[] y;
 
     /**
-     * Method constructs an implementation of the class and initialises
-     * variables.
+     * Initialises the class variable guesser with a newly created instance of
+     * Random.
      */
     public ShipBuilder() {
         this.guesser = new Random();
@@ -70,8 +70,7 @@ public class ShipBuilder {
             y[i] = cy;
             if (orientation == 0) {
                 cx++;
-            }
-            if (orientation == 1) {
+            } else if (orientation == 1) {
                 cy++;
             }
         }

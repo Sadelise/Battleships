@@ -19,8 +19,9 @@ public class Battleships {
     private final ShipBuilder sb;
 
     /**
-     * Method constructs an implementation of the class and initialises
-     * variables according to parameters.
+     * Initialises the class variables with values given as parameters. Also
+     * creates an instance of ShipBuilder-class and Player- and Ai-classes
+     * depending on the parameters given.
      *
      * @param mode Number that decides if the game initialises as human vs ai or
      * human vs human,

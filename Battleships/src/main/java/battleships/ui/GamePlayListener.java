@@ -84,12 +84,13 @@ class GamePlayListener implements ActionListener {
             Ship ship = game.play(0, 0);
             updateBoard(player2.getEnemyMap(), player2ButtonMap);
             if (ship == null) {
+                upDateLabels();
                 break;
             } else if (ship.didItSink() && game.didPlayerWin(game.getPlayer2())) {
                 endGame(game.getPlayer2());
+                break;
             }
         }
-        upDateLabels();
     }
 
     private void updateBoard(int[][] enemyMap, JButton[][] buttonMap) {

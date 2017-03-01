@@ -2,14 +2,13 @@ package battleships.ui;
 
 import battleships.logic.Battleships;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.*;
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
-public class PlaceShipsGUI extends GUI implements Runnable {
+public class PlaceShipsGUI extends GUI {
 
     private JFrame frame;
     private final Battleships game;
@@ -25,35 +24,26 @@ public class PlaceShipsGUI extends GUI implements Runnable {
     }
 
     @Override
-    public void run() {
-        frame = new JFrame("Battleships");
-        frame.setPreferredSize(new Dimension(1000, 500));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        start(frame.getContentPane());
-    }
-
-    @Override
-    public JPanel start(Container container) {
+    public JPanel getPanel() {
         JPanel panel = new JPanel(new MigLayout(
                 "fill",
                 "50[]20[]100",
                 ""));
-        container.add(panel);
         panel.setBackground(Color.white);
-        JLabel playerLabel = new JLabel("Player 1");
-        JLabel instruction = new JLabel();
+        JLabel playerLabel = new JLabel("Player 1", SwingConstants.CENTER);
+        JLabel instruction = new JLabel("", SwingConstants.CENTER);
         instruction.setText("<html><body><center><b>To place your ships:</b><br>"
                 + "- click the ship you want to place<br>"
                 + "- click the spot where you want your ship to start from.<br> "
                 + "- change the direction your boat is facing by pressing the toggle button.</center></html></body>");
         instruction.setFont(new Font("Serif", Font.PLAIN, 12));
-        JLabel error = new JLabel("<html><br></html>");
+        JLabel error = new JLabel(" ", SwingConstants.CENTER);
         JButton start = new JButton("Start");
         buttons.put("start", start);
         panel.add(instruction, "skip, wrap, center");
         panel.add(playerLabel, "skip, wrap, center");
         panel.add(shipsPanel());
-        panel.add(coordinates(), "height 500, center, wrap");
+        panel.add(coordinates(), "h 350!, w 350!, center, wrap");
         panel.add(error, "height 200, width 500, center, skip, wrap");
         panel.add(start, "skip, center, wrap");
 

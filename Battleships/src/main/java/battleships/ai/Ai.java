@@ -20,9 +20,9 @@ public class Ai extends Player {
     private final Random guesser;
 
     /**
-     * Method constructs an implementation of the class and initialises
-     * variables.
-     *
+     * Initialises random-generator and lists which will hold information about
+     * hits. Variable containing the information whether or not a ship was hit
+     * on last turn will be initially set as false.
      */
     public Ai() {
         guesser = new Random();
@@ -117,7 +117,7 @@ public class Ai extends Player {
     }
 
     private void addAcceptable(int x, int y) {
-        if (getPositionValidator().withinBoundaries(x, y, getEnemyMap().length) && getEnemyMap()[x][y] == 0) {
+        if (getShipValidator().withinBoundaries(x, y, getEnemyMap().length) && getEnemyMap()[x][y] == 0) {
             acceptableX.add(x);
             acceptableY.add(y);
         }

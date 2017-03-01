@@ -2,14 +2,13 @@ package battleships.ui;
 
 import battleships.logic.Battleships;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
-public class GamePlayGUI extends GUI implements Runnable {
+public class GamePlayGUI extends GUI {
 
     private final ControlGUI main;
     private final JButton[][] player1ButtonMap;
@@ -23,12 +22,11 @@ public class GamePlayGUI extends GUI implements Runnable {
     }
 
     @Override
-    public JPanel start(Container container) {
+    public JPanel getPanel() {
         JPanel panel = new JPanel(new MigLayout(
                 "fill",
                 "[]20[]",
                 "[]20[]"));
-        container.add(panel);
         panel.setBackground(Color.white);
         JLabel player1 = new JLabel("Player 1's turn");
         player1.setForeground(Color.red);
@@ -43,8 +41,8 @@ public class GamePlayGUI extends GUI implements Runnable {
 
         panel.add(player1, "center");
         panel.add(player2, "center, wrap");
-        panel.add(player1Board);
-        panel.add(player2Board, "wrap");
+        panel.add(player1Board, "h 350!, w 350!, center");
+        panel.add(player2Board, "h 350!, w 350!, center, wrap");
         panel.add(winner, "span, center, wrap");
         panel.add(newGame, "center");
         panel.add(quit, "center, wrap");

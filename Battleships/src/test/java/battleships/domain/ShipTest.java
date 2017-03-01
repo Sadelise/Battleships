@@ -1,14 +1,11 @@
 package battleships.domain;
 
-
-
-import battleships.domain.Ship;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ShipTest {
 
-    private Ship ship;
+    private final Ship ship;
 
     public ShipTest() {
         int[] x = {4};

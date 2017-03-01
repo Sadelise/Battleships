@@ -1,41 +1,20 @@
 package battleships.logic;
 
 import battleships.ai.Ai;
-import battleships.logic.ShipBuilder;
 import battleships.domain.Player;
 import battleships.domain.Ship;
 import java.util.*;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ShipBuilderTest {
 
-    private ShipBuilder sb;
+    private final ShipBuilder sb;
     private Player ai;
 
     public ShipBuilderTest() {
         ai = new Ai();
         sb = new ShipBuilder();
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

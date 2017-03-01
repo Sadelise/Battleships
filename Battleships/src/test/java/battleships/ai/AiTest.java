@@ -1,37 +1,16 @@
 package battleships.ai;
 
-import battleships.domain.Player;
 import battleships.logic.Battleships;
 import battleships.domain.Ship;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AiTest {
 
-    private Ai ai;
+    private final Ai ai;
 
     public AiTest() {
         ai = new Ai();
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

@@ -29,11 +29,10 @@ public class ControlGUI implements Runnable {
         return frame;
     }
 
-    public void switchTo(GUI opening) {
-        opening.run();
-        inUse = opening;
+    public void switchTo(GUI open) {
+        inUse = open;
         frame.getContentPane().removeAll();
-        opening.start(frame.getContentPane());
+        frame.getContentPane().add(open.getPanel());
         frame.pack();
         frame.setVisible(true);
     }

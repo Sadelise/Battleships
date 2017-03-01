@@ -3,8 +3,8 @@ package battleships.logic;
 import battleships.domain.Ship;
 
 /**
- * Class contains methods for ensuring a player's ships are correctly shaped and
- * laid out according to rules.
+ * Class contains methods for ensuring that player's ships are correctly shaped
+ * and laid out according to rules.
  */
 public class ShipValidator {
 
@@ -44,9 +44,7 @@ public class ShipValidator {
 
     private Boolean shipPiecesAttached(int[] x, int[] y) {
         if (x.length > 1) {
-            int changes[];
-            int stays[];
-            int staysAt;
+            int changes[], stays[], staysAt;
             if (y[0] == y[1]) {
                 staysAt = y[0];
                 stays = y;
@@ -56,19 +54,18 @@ public class ShipValidator {
                 stays = x;
                 changes = y;
             }
-            int prev = changes[0];
             for (int i = 1; i < x.length; i++) {
-                if ((prev + 1 != changes[i] || stays[i] != staysAt)) {
+                if ((changes[i - 1] + 1 != changes[i] || stays[i] != staysAt)) {
                     return false;
                 }
-                prev = changes[i];
             }
         }
         return true;
     }
 
     /**
-     * Method makes sure coordinates are within the dimensions of the game area.
+     * Method makes sure given coordinates are within the dimensions of the game
+     * area.
      *
      * @param x x coordinate to be checked
      * @param y y coordinate to be checked
@@ -76,6 +73,9 @@ public class ShipValidator {
      * @return True if coordinates within limits, otherwise false
      */
     public Boolean withinBoundaries(int x, int y, int length) {
-        return y >= 0 && x >= 0 && y < length && x < length;
+        return y >= 0
+                && x >= 0
+                && y < length
+                && x < length;
     }
 }

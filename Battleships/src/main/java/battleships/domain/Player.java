@@ -14,8 +14,9 @@ public abstract class Player {
     private final ShipValidator sv;
 
     /**
-     * Method constructs an implementation of the class and initialises
-     * variables.
+     * Initialises arrays containing ship location information and feedback from
+     * shooting. Also initialises an empty list that will contain the players
+     * ships and an instance of ShipValidator class.
      */
     public Player() {
         ships = new ArrayList<>();
@@ -88,7 +89,7 @@ public abstract class Player {
      *
      * @return positionValidator
      */
-    public ShipValidator getPositionValidator() {
+    public ShipValidator getShipValidator() {
         return sv;
     }
 

@@ -12,8 +12,8 @@ public class Ship {
     private int hits;
 
     /**
-     * Method constructs an implementation of the class and initialises
-     * variables.
+     * Initialises class variables with values given as parameters and the
+     * number of hits as 0.
      *
      * @param size The amount of slots in the array the ship must occupy
      * @param x The x coordinates of the slots in the array the ship occupies.
